@@ -2,6 +2,7 @@ package wiki.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,7 +28,7 @@ public class Wiki implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "WIKI_ID", foreignKey =@ForeignKey(name="FK_WIKI_ID"))
-	private ArrayList<Articulo> articulos;
+	private List<Articulo> articulos = new ArrayList<Articulo>();
 
 	public int getId() {
 		return id;
@@ -53,7 +54,7 @@ public class Wiki implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public ArrayList<Articulo> getArticulos() {
+	public List<Articulo> getArticulos() {
 		return articulos;
 	}
 
@@ -67,6 +68,12 @@ public class Wiki implements Serializable{
 		this.topic = topic;
 		this.descripcion = descripcion;
 		this.articulos = articulos;
+	}
+	
+	public Wiki( String topic, String descripcion) {
+		super();		
+		this.topic = topic;
+		this.descripcion = descripcion;		
 	}
 
 	public Wiki() {
