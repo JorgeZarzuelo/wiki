@@ -14,10 +14,12 @@ public class Revision implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id	
+	@Id
+	private int id;
+		
 	private int user_id;
 	
-	@Id
+	
 	private int articulo_id;
 	
 	@Lob
@@ -67,6 +69,14 @@ public class Revision implements Serializable {
 
 	public void setPendiente(boolean pendiente) {
 		this.pendiente = pendiente;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

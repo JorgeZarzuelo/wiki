@@ -15,9 +15,10 @@ public class Rol implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id	
+	private int id;
+	
 	private int user_id;
 	
-	@Id
 	private int wiki_id;
 	
 	@Enumerated
@@ -32,21 +33,27 @@ public class Rol implements Serializable{
 		super();		
 	}	
 	
-	public Rol(int user_id, int wiki_id, Tipo tipo, boolean pendiente) {
+	public Rol( Tipo tipo, boolean pendiente) {
 		super();
-		this.user_id = user_id;
-		this.wiki_id = wiki_id;
+	
 		this.tipo = tipo;
 		this.pendiente = pendiente;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getUser_id() {
 		return user_id;
 	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
+		
 
 	public int getWiki_id() {
 		return wiki_id;
@@ -54,6 +61,10 @@ public class Rol implements Serializable{
 
 	public void setWiki_id(int wiki_id) {
 		this.wiki_id = wiki_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public boolean isPendiente() {

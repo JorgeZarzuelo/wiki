@@ -5,6 +5,10 @@ import javax.servlet.ServletContextListener;
 
 import wiki.entities.Articulo;
 import wiki.entities.ArticuloDAO;
+import wiki.entities.Rol;
+import wiki.entities.Rol.Tipo;
+import wiki.entities.User;
+import wiki.entities.UserDAO;
 import wiki.entities.Wiki;
 import wiki.entities.WikiDAO;
 
@@ -42,7 +46,33 @@ public class Test implements ServletContextListener {
 		//recorrer articulos de una wiki
 	    wikiGuardada.getArticulos().forEach((articulo) -> {
 	    	System.out.println("TEST: Recorriendo articulos: " + articulo.getTitulo() + " Contenido: " + articulo.getContenido());
+	    	
 	    });
+	    
+	    
+	    //USUARIOS
+	    User usuario = new User();
+	    usuario.setUsername("pepe");
+	    usuario.setPassword("ASDFASDFA343.#");
+	    UserDAO userDAO = new UserDAO();
+	    User usuarioCreado = userDAO.crearUser(usuario);
+	    System.out.println("TEST: Creado usuario con ID: " + usuarioCreado.getId());
+	    
+	    //ROLES
+	    Rol rol1 = new Rol();
+	    rol1.setTipo(Tipo.GESTOR);
+	    rol1.setWiki_id(wikiGuardada.getId());
+	    rol1.setUser_id(usuarioCreado.getId());
+	    usuarioCreado.getRoles().add(rol1);    
+	    
+	    User usuarioEditado = userDAO.editarUser(usuario);
+	    
+	    usuarioEditado.getRoles().forEach(rol -> {
+	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " User: " + rol.getUser_id() + " Wiki: " + rol.getWiki_id());
+	    });
+	   
+	    
+	    
 		System.out.println("TEST: Test finalizados");
 	}
 }
