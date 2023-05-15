@@ -1,13 +1,20 @@
 package wiki.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Table(name = "articulos")
@@ -20,7 +27,12 @@ public class Articulo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String titulo;
+	@Lob
 	private String contenido;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "articulo_id", foreignKey =@ForeignKey(name="FK_REVISION_ARTICULO_ID"))
+	private List<Revision> revisiones = new ArrayList<Revision>();
 	
 	
 	
@@ -61,6 +73,14 @@ public class Articulo implements Serializable {
 	}
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
+	}
+
+	public List<Revision> getRevisiones() {
+		return revisiones;
+	}
+
+	public void setRevisiones(List<Revision> revisiones) {
+		this.revisiones = revisiones;
 	}
 	
 	

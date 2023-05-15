@@ -11,6 +11,10 @@
  
         <class>org.uned.jzg.wiki.entities.Articulo</class>
         <class>org.uned.jzg.wiki.entities.Wiki</class>
+        <class>org.uned.jzg.wiki.entities.Rol</class>
+        <class>org.uned.jzg.wiki.entities.User</class>
+        <class>org.uned.jzg.wiki.entities.Revision</class>
+      
  
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
