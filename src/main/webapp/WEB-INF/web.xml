@@ -6,11 +6,13 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
-  <listener>
+   <listener>
     <listener-class>wiki.InitApp</listener-class>   
   </listener>
-  
+ 
     <listener>
     <listener-class>wiki.Test</listener-class>   
-  </listener>
+  </listener> 
+  
+
 </web-app>  

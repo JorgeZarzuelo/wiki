@@ -3,6 +3,6 @@
 
 <t:public_page>    
     <jsp:body>
-        <p>Hi I'm the heart of the message</p>
+        <p>soy el login</p>
     </jsp:body>
 </t:public_page>
