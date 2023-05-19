@@ -6,6 +6,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,12 +28,13 @@ public class Wiki implements Serializable{
 	private String descripcion;
 	
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "wiki_id")
+	private List<Rol> roles = new ArrayList<Rol>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "wiki_id", foreignKey =@ForeignKey(name="FK_WIKI_ID"))
 	private List<Articulo> articulos = new ArrayList<Articulo>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "wiki_id", foreignKey =@ForeignKey(name="FK_ROL_WIKI_ID"))
-	private List<Rol> roles = new ArrayList<Rol>();
 
 	public int getId() {
 		return id;

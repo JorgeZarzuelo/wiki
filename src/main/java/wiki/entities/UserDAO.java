@@ -32,8 +32,8 @@ public class UserDAO {
 		EntityManager em = WikiEntityManager.getEntityManager();
 		em.getTransaction().begin();
 		try {
-			Articulo articulo = em.find(Articulo.class, _user.getId());
-			if (articulo != null) {
+			User user = em.find(User.class, _user.getId());
+			if (user != null) {
 				em.merge(_user);
 				em.getTransaction().commit();
 			}

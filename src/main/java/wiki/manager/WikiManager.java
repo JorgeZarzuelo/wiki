@@ -41,8 +41,9 @@ public class WikiManager {
 		UserDAO userDAO = new UserDAO();
 		Tipo tipo =Tools.getTipoFromString(_tipo);
 		User user = userDAO.getUserByID(Integer.parseInt(user_id));
-	    user.getRoles().add(new Rol(tipo, false, Integer.parseInt(user_id), Integer.parseInt(wiki_id)));
+	    user.getRoles().add(new Rol(tipo, false, Integer.parseInt(wiki_id)));
 	    userDAO.editarUser(user);
+	    System.out.println("en el manager: id: " + user_id + " UserIDObtenida: " +user.getId() + " roles: " + user.getRoles().size());
 	}
 	
 	public boolean isUserGestor(User user) {

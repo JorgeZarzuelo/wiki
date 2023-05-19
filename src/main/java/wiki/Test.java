@@ -64,8 +64,9 @@ public class Test implements ServletContextListener {
 	    
 	    Rol rol1 = new Rol();
 	    rol1.setTipo(Tipo.COORDINADOR);
+	    
 	    rol1.setWiki_id(wikiGuardada.getId());
-	    rol1.setUser_id(createdUser.getId());
+	    //rol1.setUser_id(createdUser.getId());
 	    createdUser.getRoles().add(rol1);     
 	    	       
 	    
@@ -73,7 +74,7 @@ public class Test implements ServletContextListener {
 	    Rol rol2 = new Rol();
 	    rol2.setTipo(Tipo.SUPERVISOR);
 	    rol2.setWiki_id(wikiGuardada.getId());
-	    rol2.setUser_id(createdUser.getId());
+	    //rol2.setUser_id(createdUser.getId());
 	    createdUser.getRoles().add(rol2); 
 	    
 	    userDAO.editarUser(createdUser);
@@ -86,11 +87,11 @@ public class Test implements ServletContextListener {
 	    User user2 = userDAO.getUserByID(createdUser2.getId());
 	    
 	    user1.getRoles().forEach(rol -> {
-	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " User: " + rol.getUser_id() + " Wiki: " + rol.getWiki_id() + " ROL ID: " + rol.getId());
+	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " ROL ID: " + rol.getId());
 	    });
 	    
 	    user2.getRoles().forEach(rol -> {
-	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " User: " + rol.getUser_id() + " Wiki: " + rol.getWiki_id() + " ROL ID: " + rol.getId());
+	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " ROL ID: " + rol.getId());
 	    });
 	   
 	    

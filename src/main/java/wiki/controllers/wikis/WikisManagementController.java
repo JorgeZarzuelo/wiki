@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import wiki.manager.WikiManager;
+
 /**
  * Servlet implementation class WikisManagementController
  */
@@ -31,7 +33,8 @@ public class WikisManagementController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		WikiManager manager = new WikiManager();		
+		request.setAttribute("wikis", manager.getWikisList());
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/admin/wikis.jsp");
 		rd.forward(request, response);
 	}

@@ -22,7 +22,7 @@ public class Rol implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private int user_id;
+	//private int user_id;
 	
 	private int wiki_id;
 	
@@ -39,15 +39,10 @@ public class Rol implements Serializable{
 		super();		
 	}	
 	
-	public Rol( Tipo tipo, boolean pendiente) {
+
+	public Rol( Tipo tipo, boolean pendiente, Integer wiki_id) {
 		super();
-	
-		this.tipo = tipo;
-		this.pendiente = pendiente;
-	}
-	public Rol( Tipo tipo, boolean pendiente, Integer user_id, Integer wiki_id) {
-		super();
-	    this.user_id = user_id;
+	    //this.user_id = user_id;
 		this.tipo = tipo;
 		this.pendiente = pendiente;
 		this.wiki_id = wiki_id;
@@ -62,22 +57,17 @@ public class Rol implements Serializable{
 		this.id = id;
 	}
 
-	public int getUser_id() {
-		return user_id;
-	}
-		
+	
 
 	public int getWiki_id() {
 		return wiki_id;
 	}
 
+
 	public void setWiki_id(int wiki_id) {
 		this.wiki_id = wiki_id;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
 
 	public boolean isPendiente() {
 		return pendiente;
