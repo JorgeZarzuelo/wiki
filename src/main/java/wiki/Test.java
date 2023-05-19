@@ -52,23 +52,45 @@ public class Test implements ServletContextListener {
 	    
 	    //USUARIOS
 	    User usuario = new User();
+	    UserDAO userDAO = new UserDAO();
 	    usuario.setUsername("pepe");
 	    usuario.setPassword("ASDFASDFA343.#");
-	    UserDAO userDAO = new UserDAO();
-	    User usuarioCreado = userDAO.crearUser(usuario);
-	    System.out.println("TEST: Creado usuario con ID: " + usuarioCreado.getId());
+	    User createdUser = userDAO.crearUser(usuario);
 	    
-	    //ROLES
+	    User usuario2 = new User();
+	    usuario2.setUsername("juan");
+	    usuario2.setPassword("ASasdfasdf343.#");
+	    User createdUser2 = userDAO.crearUser(usuario2);
+	    
 	    Rol rol1 = new Rol();
-	    rol1.setTipo(Tipo.GESTOR);
+	    rol1.setTipo(Tipo.COORDINADOR);
 	    rol1.setWiki_id(wikiGuardada.getId());
-	    rol1.setUser_id(usuarioCreado.getId());
-	    usuarioCreado.getRoles().add(rol1);    
+	    rol1.setUser_id(createdUser.getId());
+	    createdUser.getRoles().add(rol1);     
+	    	       
 	    
-	    User usuarioEditado = userDAO.editarUser(usuario);
 	    
-	    usuarioEditado.getRoles().forEach(rol -> {
-	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " User: " + rol.getUser_id() + " Wiki: " + rol.getWiki_id());
+	    Rol rol2 = new Rol();
+	    rol2.setTipo(Tipo.SUPERVISOR);
+	    rol2.setWiki_id(wikiGuardada.getId());
+	    rol2.setUser_id(createdUser.getId());
+	    createdUser.getRoles().add(rol2); 
+	    
+	    userDAO.editarUser(createdUser);
+	    
+	    createdUser2.getRoles().add(rol2); 
+	    
+	    userDAO.editarUser(createdUser2);
+	       
+	    User user1 = userDAO.getUserByID(createdUser.getId());
+	    User user2 = userDAO.getUserByID(createdUser2.getId());
+	    
+	    user1.getRoles().forEach(rol -> {
+	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " User: " + rol.getUser_id() + " Wiki: " + rol.getWiki_id() + " ROL ID: " + rol.getId());
+	    });
+	    
+	    user2.getRoles().forEach(rol -> {
+	    	 System.out.println("TEST: Roles usuario editado: " + rol.getTipo() + " User: " + rol.getUser_id() + " Wiki: " + rol.getWiki_id() + " ROL ID: " + rol.getId());
 	    });
 	   
 	    

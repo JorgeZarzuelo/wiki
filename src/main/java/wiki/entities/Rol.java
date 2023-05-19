@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +19,7 @@ public class Rol implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id	
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private int user_id;
@@ -25,10 +30,11 @@ public class Rol implements Serializable{
 	private Tipo tipo;
 	
 	public static enum Tipo{
-		GESTOR, COORDINADOR, SUPERVISOR
+		 COORDINADOR, SUPERVISOR
 	};
-	private boolean pendiente;
+	private boolean pendiente;	
 	
+
 	public Rol() {
 		super();		
 	}	

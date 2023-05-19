@@ -28,7 +28,7 @@ public class User implements Serializable{
 	private String password;
 	private boolean isGestor;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", foreignKey =@ForeignKey(name="FK_USER_ID"))
 	private List<Rol> roles = new ArrayList<Rol>();
 	

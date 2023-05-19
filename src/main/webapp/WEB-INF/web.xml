@@ -10,9 +10,29 @@
     <listener-class>wiki.InitApp</listener-class>   
   </listener>
  
-    <listener>
+   <listener>
     <listener-class>wiki.Test</listener-class>   
   </listener> 
+    
+  <filter>
+  		<description>Filtro para vistas y servlets de GESTOR</description>
+  		<filter-name>OnlyGestorFilter</filter-name>
+  		<filter-class>
+  			wiki.filters.OnlyGestorFilter
+  		</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  		<filter-name>OnlyGestorFilter</filter-name>
+  		<servlet-name>UserManagementController</servlet-name>
+  		<servlet-name>WikisManagementController</servlet-name>
+  		<dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  
+  <error-page>
+  		<error-code>401</error-code>
+  		<location>/WEB-INF/vistas/errors/401.jsp</location>
+  </error-page>
   
 
 </web-app>  

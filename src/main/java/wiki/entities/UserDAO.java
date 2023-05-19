@@ -1,9 +1,11 @@
 package wiki.entities;
 
 
+import java.util.ArrayList;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import wiki.utils.WikiEntityManager;
+import wiki.manager.WikiEntityManager;
 
 public class UserDAO {
 
@@ -97,6 +99,23 @@ public class UserDAO {
 		}
 		
 		return currentUser;
+	}
+	
+	public ArrayList<User> getAllUsers(){
+		ArrayList<User> users = null;
+		EntityManager em = WikiEntityManager.getEntityManager();		
+		try {
+			   Query query = em.createQuery("SELECT e from User e", User.class);
+			   @SuppressWarnings("unchecked")
+			   ArrayList<User> foundUsers = (ArrayList<User>) query.getResultList();
+		       users = foundUsers;
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return users;
 	}
 	
 

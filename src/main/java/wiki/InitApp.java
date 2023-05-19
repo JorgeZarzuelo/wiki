@@ -3,8 +3,8 @@ package wiki;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import wiki.manager.WikiEntityManager;
 import wiki.manager.WikiManager;
-import wiki.utils.WikiEntityManager;
 /**
  * 
  * @author JORGE ZARZUELO GUTIERREZ
@@ -23,7 +23,7 @@ public class InitApp implements ServletContextListener{
 		
 		// Creación del usuario GESTOR
 		WikiManager manager = new WikiManager();
-		manager.crearGestor("admin", "admin");;
+		manager.crearGestor("admin", "admin");
 		
 		System.out.println("Aplicación inicializada");
 	}

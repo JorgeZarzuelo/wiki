@@ -1,8 +1,11 @@
 package wiki.entities;
 
 
+import java.util.ArrayList;
+
 import jakarta.persistence.EntityManager;
-import wiki.utils.WikiEntityManager;
+import jakarta.persistence.Query;
+import wiki.manager.WikiEntityManager;
 
 public class WikiDAO {
 
@@ -79,6 +82,23 @@ public class WikiDAO {
 		}
 		
 		return currentWiki;
+	}
+
+	public ArrayList<Wiki> getAllWikis() {
+		ArrayList<Wiki> wikis = null;
+		EntityManager em = WikiEntityManager.getEntityManager();		
+		try {
+			   Query query = em.createQuery("SELECT e from Wiki e", Wiki.class);
+			   @SuppressWarnings("unchecked")
+			   ArrayList<Wiki> foundWikis = (ArrayList<Wiki>) query.getResultList();
+		       wikis = foundWikis;
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return wikis;
 	}
 	
 

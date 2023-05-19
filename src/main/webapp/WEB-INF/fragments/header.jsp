@@ -20,7 +20,7 @@
   
     <span class="user-info">
     	<c:if test="${sessionScope.user != null}">  
-    		Usuario logueado:  ${sessionScope.user.username} - ID: ${sessionScope.user.id} - SessionID: ${pageContext.session.id} - Gestor: ${sessionScope.isGestor}
+    		Usuario logueado:  ${sessionScope.user.username} - ID: ${sessionScope.user.id} - SessionID: ${pageContext.session.id} 
     	</c:if>
     </span>
     
@@ -36,9 +36,6 @@
 		   <li><a href="${pageContext.request.contextPath}/wikis">Wikis</a></li>
 		</c:if>
 		
-		<li><a href="${pageContext.request.contextPath}/vistas">Memoria</a></li>
-		
-		<li><a href="${pageContext.request.contextPath}/javadoc">Javadoc</a></li>
 		
 		<c:if test="${sessionScope.user != null}"> 
 		   <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>

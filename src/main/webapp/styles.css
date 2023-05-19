@@ -36,12 +36,12 @@ body {
     padding-left:6px;
     padding-right:3px;
 }
-.menu li a{
+.menu li a, .footer a{
 	text-decoration: none;
 	font-size: 18px;
 	color:#FFC857;
 }
-.menu li a:hover{
+.menu li a:hover, .footer a{
     text-decoration:underline;
 	color:#FFC857;
 }
@@ -61,15 +61,22 @@ body {
 	margin: auto;
 	padding: 15px;
 }
-.login  button, .registro button {
+.login  button, .registro button, .management button {
 	background-color: #FFC857;
 	color: #1F2041;
 	border: none;
 	padding: 5px 12px;
 	cursor:pointer;
 }
-.login  button:hover, .registro button:hover {
+.login  button:hover, .registro button:hover, .management button:hover {
 	background-color: #ffda8c;
+}
+button.delete {
+	background-color: red;
+	color: white;
+}
+button.delete:hover {
+	background-color: #ff7d7d;
 }
 .login .field, .registro .field {
 	padding: 20px 10px 0px 10px;
@@ -81,8 +88,33 @@ body {
 	display:block;
 	margin-right: 50px;
 }
+.management{
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+.management h1{
 
+	color: #1F2041;
+}
+.management table,.management th, .management td {
+  border: 1px solid;
+  padding:3px;
+  border-collapse: collapse;
+}
 
+td.no-border, table.no-border{
+	border: 0px;
+}
+tr.border {
+	 border: 1px solid;
+}
+.management .mensaje{
+	padding:10px;
+	font-size: 20px;
+	background-color: #119DA4;
+	color: white;
+}
 
 
 

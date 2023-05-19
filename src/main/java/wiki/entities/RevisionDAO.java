@@ -4,7 +4,7 @@ package wiki.entities;
 
 
 import jakarta.persistence.EntityManager;
-import wiki.utils.WikiEntityManager;
+import wiki.manager.WikiEntityManager;
 
 public class RevisionDAO {
 

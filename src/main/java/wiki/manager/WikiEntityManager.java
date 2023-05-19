@@ -1,4 +1,4 @@
-package wiki.utils;
+package wiki.manager;
 
 
 
