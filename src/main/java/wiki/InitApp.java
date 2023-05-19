@@ -3,7 +3,7 @@ package wiki;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-
+import wiki.manager.WikiManager;
 import wiki.utils.WikiEntityManager;
 /**
  * 
@@ -20,6 +20,10 @@ public class InitApp implements ServletContextListener{
 		
 		// Creación del entity manager factory
 		wikiEntityManager.crear();
+		
+		// Creación del usuario GESTOR
+		WikiManager manager = new WikiManager();
+		manager.crearGestor("admin", "admin");;
 		
 		System.out.println("Aplicación inicializada");
 	}

@@ -3,10 +3,10 @@
 
 <t:public_page>    
     <jsp:body>
-        <div class="login">
-	        <h2>LOGIN</h2>
+        <div class="registro">
+	        <h2>REGISTRO</h2>
 	        <div class="mensaje">${ requestScope.mensaje != null ? mensaje : '' }</div>
-	        <form action="${pageContext.request.contextPath}/login" method="post">
+	        <form action="${pageContext.request.contextPath}/registro" method="post">
 	        
 	           <div class="field">
 		            <label for="username">Username: </label>
@@ -17,11 +17,11 @@
 		            <input type="password" name="password" id="password">	        	
 	        	</div>
 	        	<div class="field">
-	        		<button type="submit">ENVIAR</button>
+	        		<button type="submit">CREAR CUENTA</button>
 	        	</div>
 	        </form>
 	        <div class="no-account">
-	        	<p>¿Aún no tiene una cuenta? <a href="${pageContext.request.contextPath}/registro">Crear cuenta</a><p>
+	        	<p>¿Ya tiene una cuenta? <a href="${pageContext.request.contextPath}/login">Login</a><p>
 	        </div>
         </div>
     </jsp:body>

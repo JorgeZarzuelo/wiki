@@ -39,7 +39,13 @@ public class Rol implements Serializable{
 		this.tipo = tipo;
 		this.pendiente = pendiente;
 	}
-
+	public Rol( Tipo tipo, boolean pendiente, Integer user_id, Integer wiki_id) {
+		super();
+	    this.user_id = user_id;
+		this.tipo = tipo;
+		this.pendiente = pendiente;
+		this.wiki_id = wiki_id;
+	}
 
 
 	public int getId() {

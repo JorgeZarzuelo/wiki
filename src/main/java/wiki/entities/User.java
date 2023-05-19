@@ -6,6 +6,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class User implements Serializable{
 	private int id;
 	private String username;
 	private String password;
+	private boolean isGestor;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", foreignKey =@ForeignKey(name="FK_USER_ID"))
@@ -38,13 +40,27 @@ public class User implements Serializable{
 		super();
 	}
 
-	public User(int id, String username, String password, List<Rol> roles, List<Revision> revisiones) {
+
+	
+	public User(int id, String username, String password, boolean isGestor, List<Rol> roles,
+			List<Revision> revisiones) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.isGestor = isGestor;
 		this.roles = roles;
 		this.revisiones = revisiones;
+	}
+
+
+
+	public User(String username, String password, boolean isGestor) {
+		super();
+		
+		this.username = username;
+		this.password = password;
+		this.isGestor = isGestor;
 	}
 
 	public int getId() {
@@ -85,6 +101,14 @@ public class User implements Serializable{
 
 	public void setRevisiones(List<Revision> revisiones) {
 		this.revisiones = revisiones;
+	}
+
+	public boolean isGestor() {
+		return isGestor;
+	}
+
+	public void setGestor(boolean isGestor) {
+		this.isGestor = isGestor;
 	}
 	
 	

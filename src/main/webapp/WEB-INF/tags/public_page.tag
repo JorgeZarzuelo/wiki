@@ -3,8 +3,10 @@
 
 <jsp:include page="/WEB-INF/fragments/header.jsp" />
 <main>
-	<div class="main">
-	   <jsp:doBody/>
+   <div class=main-wrapper>
+		<div class="main">
+		   <jsp:doBody/>
+		</div>
 	</div>
 </main>
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />

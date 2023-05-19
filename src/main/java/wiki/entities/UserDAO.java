@@ -2,6 +2,7 @@ package wiki.entities;
 
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import wiki.utils.WikiEntityManager;
 
 public class UserDAO {
@@ -75,6 +76,23 @@ public class UserDAO {
 		} catch (Exception e) {
 			e.printStackTrace();			
 		} finally {
+			em.close();
+		}
+		
+		return currentUser;
+	}
+	
+	public User getUserByCredentials (String username, String password) {
+		User currentUser = null;
+		EntityManager em = WikiEntityManager.getEntityManager();
+		try {
+			Query query = em.createQuery("SELECT u from User u WHERE u.username=:username AND u.password=:password");
+			query.setParameter("username", username);
+			query.setParameter("password", password);
+			currentUser = (User) query.getSingleResult();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
 			em.close();
 		}
 		
