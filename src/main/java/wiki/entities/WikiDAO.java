@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import wiki.manager.WikiEntityManager;
+import wiki.managers.WikiEntityManager;
 
 public class WikiDAO {
 

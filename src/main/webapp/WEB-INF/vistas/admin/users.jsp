@@ -77,9 +77,10 @@
 	        
 	        <div class="user-list">
 	        <h2>Lista de usuarios:</h2>
+	          <c:if test="${requestScope.users != null}">
 	        	<table>
-		        <tr><th>ID</th><th>USERNAME</th><th>PASSWORD</th><th></th><th>ROLES</th><th></th></tr>
-		           <c:if test="${requestScope.users != null}">
+		           <tr><th>ID</th><th>USERNAME</th><th>PASSWORD</th><th>ROLES</th><th></th><th></th></tr>
+		           
 			        <c:forEach var="user" items="${requestScope.users}" >
 				         <tr>
 				            <td>${user.id}</td>
@@ -124,9 +125,9 @@
 				         </tr>  
 				         
 				              
-			        </c:forEach>
-			       </c:if> 
-		        </table>
+			        </c:forEach>			      
+		          </table>
+		      </c:if> 
 	        </div>
 	        
        </div> 

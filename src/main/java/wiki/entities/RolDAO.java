@@ -4,7 +4,7 @@ package wiki.entities;
 
 
 import jakarta.persistence.EntityManager;
-import wiki.manager.WikiEntityManager;
+import wiki.managers.WikiEntityManager;
 
 public class RolDAO {
 	

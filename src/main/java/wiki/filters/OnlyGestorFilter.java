@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import wiki.entities.User;
-import wiki.manager.WikiManager;
+import wiki.managers.WikiManager;
 
 /**
  * Servlet Filter implementation class OnlyGestorFilter

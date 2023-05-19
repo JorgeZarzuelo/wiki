@@ -3,8 +3,8 @@ package wiki;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import wiki.manager.WikiEntityManager;
-import wiki.manager.WikiManager;
+import wiki.managers.WikiEntityManager;
+import wiki.managers.WikiManager;
 /**
  * 
  * @author JORGE ZARZUELO GUTIERREZ
