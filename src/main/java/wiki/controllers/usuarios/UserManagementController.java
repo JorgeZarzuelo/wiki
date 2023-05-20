@@ -41,6 +41,8 @@ public class UserManagementController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/admin/users.jsp");
 		rd.forward(request, response);
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -111,8 +113,7 @@ public class UserManagementController extends HttpServlet {
 							&& !request.getParameter("user_id").isEmpty() 
 							&& request.getParameter("password") != null 
 							&& !request.getParameter("password").isEmpty()	) {
-						WikiManager manager = new WikiManager();
-						System.out.println("NUEVA CONTRASEÑA: " + request.getParameter("password"));
+						WikiManager manager = new WikiManager();						
 						manager.editarPassword(request.getParameter("password"), request.getParameter("user_id"));						
 						request.setAttribute("mensaje", "Contraseña cambiada");						
 						doGet(request, response);

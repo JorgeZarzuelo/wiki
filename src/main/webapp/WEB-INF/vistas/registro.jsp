@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;encoding=UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:public_page>    
@@ -21,7 +21,7 @@
 	        	</div>
 	        </form>
 	        <div class="no-account">
-	        	<p>Â¿Ya tiene una cuenta? <a href="${pageContext.request.contextPath}/login">Login</a><p>
+	        	<p>¿Ya tiene una cuenta? <a href="${pageContext.request.contextPath}/login">Login</a><p>
 	        </div>
         </div>
     </jsp:body>

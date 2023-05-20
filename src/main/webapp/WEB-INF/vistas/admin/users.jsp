@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;encoding=UTF-8" %>
 <%@page import="wiki.entities.User" %>
 <%@page import="wiki.entities.Rol" %>
 <%@page import="wiki.entities.Wiki" %>
@@ -15,7 +15,7 @@
                  <div class="mensaje">${ requestScope.mensaje != null ? mensaje : '' }</div>
              </c:if>
            
-	        <h1>AdministraciÃ³n de usuarios</h1>
+	        <h1>Administración de usuarios</h1>
 	        
 	        <div class="creation">
 	             <h2>Crear usuario:</h2>

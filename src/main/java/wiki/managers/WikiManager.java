@@ -83,6 +83,30 @@ public class WikiManager {
 		currentUser.setPassword(password);
 		userDAO.editarUser(currentUser);
 	}
+	
+	public void crearWiki (String topic, String descripcion) {
+		Wiki wiki = new Wiki();
+		wiki.setTopic(topic);
+		wiki.setDescripcion(descripcion);
+		WikiDAO wikiDAO = new WikiDAO();
+		wikiDAO.crearWiki(wiki);
+	}
+
+	public void editarWiki(String wiki_id, String topic, String descripcion) {
+		WikiDAO wikiDAO = new WikiDAO();
+		Wiki currentWiki = wikiDAO.getWikiByID(Integer.parseInt(wiki_id));
+		currentWiki.setTopic(topic);
+		currentWiki.setDescripcion(descripcion);
+		wikiDAO.editarWiki(currentWiki);
+	}
+
+	public void eliminarWiki(String wiki_id) {
+		WikiDAO wikiDAO = new WikiDAO();
+		wikiDAO.eliminarWikiPorID(Integer.parseInt(wiki_id));	
+		// Eliminamos tambien los roles relacionados con la wiki
+		RolDAO rolDAO = new RolDAO();
+		rolDAO.deleteAllRolesByWikiId(Integer.parseInt(wiki_id));
+	}	
 
 
 	
