@@ -26,6 +26,7 @@
   		<filter-name>OnlyGestorFilter</filter-name>
   		<servlet-name>UserManagementController</servlet-name>
   		<servlet-name>WikisManagementController</servlet-name>
+  		<servlet-name>SolicitudesManagementController</servlet-name>
   		<dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   
@@ -33,6 +34,7 @@
   		<error-code>401</error-code>
   		<location>/WEB-INF/vistas/errors/401.jsp</location>
   </error-page>
+
   
 
 </web-app>  

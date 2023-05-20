@@ -1,4 +1,4 @@
-package wiki.controllers.wikis;
+package wiki.controllers;
 
 import java.io.IOException;
 
@@ -66,7 +66,7 @@ public class WikisManagementController extends HttpServlet {
 					request.setAttribute("mensaje", "Error: Debe introducir un topic y una descripción");
 					doGet(request, response);
 				}
-			}
+			} break;
 			
 			case "editar":{
 				
@@ -86,7 +86,7 @@ public class WikisManagementController extends HttpServlet {
 					request.setAttribute("mensaje", "Error: Debe introducir un topic y una descripción");
 					doGet(request, response);
 				}
-			}
+			} break;
 			
 			case "eliminar":{
 				
@@ -98,7 +98,7 @@ public class WikisManagementController extends HttpServlet {
 					request.setAttribute("mensaje", "Wiki eliminada");
 					doGet(request, response);
 				}
-			}
+			} break;
 			
 			}//fin del switch
 			

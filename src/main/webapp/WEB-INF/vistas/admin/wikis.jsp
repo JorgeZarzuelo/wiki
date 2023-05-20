@@ -45,15 +45,15 @@
 		        			 <tr>
 		        				<td>${wiki.id}</td>
 		        				<form action="${pageContext.request.contextPath}/wikis" method="post">
-		        				<td> 		        				   
-			        				     <input type="text" name="topic" value="${wiki.topic }" />
-			        			</td>
-			        			<td>	     
-			        				     <textarea cols="100" name="descripcion" rows="3">${wiki.descripcion }</textarea>
-		        				          <input type="hidden" name="operacion" value="editar" />
-		        				          <input type="hidden" name="wiki_id" value="${wiki.id}" />
-		        				</td>
-		        				<td><button type="submit">EDITAR</button></td>
+			        				<td> 		        				   
+				        				     <input type="text" name="topic" value="${wiki.topic }" />
+				        			</td>
+				        			<td>	     
+				        				     <textarea cols="100" name="descripcion" rows="3">${wiki.descripcion }</textarea>
+			        				          <input type="hidden" name="operacion" value="editar" />
+			        				          <input type="hidden" name="wiki_id" value="${wiki.id}" />
+			        				</td>
+			        				<td><button type="submit">EDITAR</button></td>
 		        				 </form>
 		        				<td>
 		        				     <form action="${pageContext.request.contextPath}/wikis" method="post">

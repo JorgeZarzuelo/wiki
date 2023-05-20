@@ -2,9 +2,12 @@ package wiki.managers;
 
 import java.util.ArrayList;
 
+import wiki.entities.Articulo;
+import wiki.entities.ArticuloDAO;
 import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
 import wiki.entities.RolDAO;
+import wiki.entities.SolicitudVO;
 import wiki.entities.User;
 import wiki.entities.UserDAO;
 import wiki.entities.Wiki;
@@ -37,11 +40,28 @@ public class WikiManager {
 		return currentUser;
 	}
 	
-	public void addRol(String user_id, String _tipo, String wiki_id) {
+	public void addRolWiki(String user_id, String _tipo, String wiki_id) {
 		UserDAO userDAO = new UserDAO();
 		Tipo tipo =Tools.getTipoFromString(_tipo);
 		User user = userDAO.getUserByID(Integer.parseInt(user_id));
-	    user.getRoles().add(new Rol(tipo, false, Integer.parseInt(wiki_id)));
+		Rol rol = new Rol();
+		rol.setPendiente(false);
+		rol.setWiki_id(Integer.parseInt(wiki_id));
+		rol.setTipo(tipo);
+	    user.getRoles().add(rol);
+	    userDAO.editarUser(user);
+	    System.out.println("en el manager: id: " + user_id + " UserIDObtenida: " +user.getId() + " roles: " + user.getRoles().size());
+	}
+	
+	public void addRolArticulo(String user_id, String _tipo, String articulo_id) {
+		UserDAO userDAO = new UserDAO();
+		Tipo tipo =Tools.getTipoFromString(_tipo);
+		User user = userDAO.getUserByID(Integer.parseInt(user_id));
+		Rol rol = new Rol();
+		rol.setPendiente(false);
+		rol.setArticulo_id(Integer.parseInt(articulo_id));
+		rol.setTipo(tipo);
+	    user.getRoles().add(rol);
 	    userDAO.editarUser(user);
 	    System.out.println("en el manager: id: " + user_id + " UserIDObtenida: " +user.getId() + " roles: " + user.getRoles().size());
 	}
@@ -65,6 +85,21 @@ public class WikiManager {
 		WikiDAO wikiDAO = new WikiDAO();
 		lista = wikiDAO.getAllWikis();
 		return lista;
+	}
+	
+	public ArrayList<Articulo> getArticulosList() {
+		ArrayList<Articulo> lista = null;
+		ArticuloDAO articulosDAO = new ArticuloDAO();
+		lista = articulosDAO.getAllArticulos();
+		return lista;
+	}
+	
+	public ArrayList<Rol> getAllRoles() {
+		ArrayList<Rol> roles = null;
+		RolDAO rolDAO = new RolDAO();
+		roles = rolDAO.getAllRoles();
+		
+		return roles;
 	}
 
 	public void eliminarUser(String user_id) {
@@ -106,7 +141,29 @@ public class WikiManager {
 		// Eliminamos tambien los roles relacionados con la wiki
 		RolDAO rolDAO = new RolDAO();
 		rolDAO.deleteAllRolesByWikiId(Integer.parseInt(wiki_id));
-	}	
+	}
+	
+	public ArrayList<SolicitudVO> getSolicitudesVO() {
+		ArrayList<SolicitudVO> solicitudes = null;			
+		solicitudes = Tools.populateSolicitudVO(this.getUserList(), this.getWikisList(), this.getArticulosList());
+		return solicitudes;
+	}
+
+	public void aprobarRol(String rol_id) {
+		RolDAO rolDAO = new RolDAO();
+		Rol current = rolDAO.getRolByID(Integer.parseInt(rol_id));
+		current.setPendiente(false);
+		rolDAO.editarRol(current);	    
+	}
+
+	public void rechazarRol(String rol_id) {
+		RolDAO rolDAO = new RolDAO();
+		rolDAO.deleteRolById(Integer.parseInt(rol_id));			
+	}
+
+
+
+	
 
 
 	

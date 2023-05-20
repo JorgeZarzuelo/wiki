@@ -45,4 +45,78 @@ public class RolDAO {
 
 	}
 	
+	public ArrayList<Rol> getAllRoles() {
+		ArrayList<Rol> roles = null;
+		EntityManager em = WikiEntityManager.getEntityManager();		
+		try {
+			   Query query = em.createQuery("SELECT e from Rol e", Rol.class);
+			   @SuppressWarnings("unchecked")
+			   ArrayList<Rol> found = (ArrayList<Rol>) query.getResultList();
+			   roles = found;
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return roles;
+	}
+
+	public Rol getRolByID(Integer id) {
+		Rol currentRol = null;
+		EntityManager em = WikiEntityManager.getEntityManager();
+		try {
+			Rol rol = em.find(Rol.class, id);
+			if(rol != null) {				
+				currentRol = rol;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return currentRol;
+	}
+	
+	public void deleteRolById(Integer id) {
+		
+		EntityManager em = WikiEntityManager.getEntityManager();
+		em.getTransaction().begin();
+		try {
+			Rol rol = em.find(Rol.class, id);
+			if (rol != null) {
+				em.remove(rol);
+				em.getTransaction().commit();
+			}
+			
+		}catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+	}
+	
+	public Rol editarRol(Rol _rol) {
+		
+		EntityManager em = WikiEntityManager.getEntityManager();
+		em.getTransaction().begin();
+		try {
+			Rol rol = em.find(Rol.class, _rol.getId());
+			if (rol != null) {
+				em.merge(_rol);
+				em.getTransaction().commit();
+			}
+			
+		}catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+		return _rol;
+	}
+	
 }

@@ -66,6 +66,7 @@ public class Test implements ServletContextListener {
 	    rol1.setTipo(Tipo.COORDINADOR);
 	    
 	    rol1.setWiki_id(wikiGuardada.getId());
+	    rol1.setPendiente(true);
 	    //rol1.setUser_id(createdUser.getId());
 	    createdUser.getRoles().add(rol1);     
 	    	       

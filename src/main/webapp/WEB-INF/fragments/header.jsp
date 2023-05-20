@@ -36,6 +36,10 @@
 		   <li><a href="${pageContext.request.contextPath}/wikis">Wikis</a></li>
 		</c:if>
 		
+		<c:if test="${sessionScope.isGestor == true }"> 
+		   <li><a href="${pageContext.request.contextPath}/solicitudes">Solicitudes</a></li>
+		</c:if>
+		
 		
 		<c:if test="${sessionScope.user != null}"> 
 		   <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>

@@ -21,10 +21,10 @@ public class Rol implements Serializable{
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	//private int user_id;
-	
+		
 	private int wiki_id;
+	
+	private int articulo_id;
 	
 	@Enumerated
 	private Tipo tipo;
@@ -83,6 +83,16 @@ public class Rol implements Serializable{
 
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
+	}
+
+
+	public int getArticulo_id() {
+		return articulo_id;
+	}
+
+
+	public void setArticulo_id(int articulo_id) {
+		this.articulo_id = articulo_id;
 	}
 	
 	

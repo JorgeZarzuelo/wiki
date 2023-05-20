@@ -2,6 +2,7 @@
 <%@page import="wiki.entities.User" %>
 <%@page import="wiki.entities.Rol" %>
 <%@page import="wiki.entities.Wiki" %>
+<%@page import="wiki.entities.Articulo" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -38,7 +39,7 @@
 	        </div>
 	        
 	        <div class="creation">
-	             <h2>Asignar rol:</h2>
+	             <h2>Asignar rol sobre wikis:</h2>
 	        	
 		        <form action="${pageContext.request.contextPath}/users" method="post">
 		        
@@ -68,7 +69,44 @@
 			            	</c:if>
 			            </select>        	
 		        	
-		        	    <input type="hidden" name="operacion" value="addRole" />
+		        	    <input type="hidden" name="operacion" value="addRoleWiki" />
+		        		<button type="submit">ASIGNAR ROL</button>
+		        	
+		        </form>
+	        
+	        </div>
+	        
+	        <div class="creation">
+	             <h2>Asignar rol sobre artículos:</h2>
+	        	
+		        <form action="${pageContext.request.contextPath}/users" method="post">
+		        
+		           
+			            <label for="id_usuario">USUARIO: </label>
+			            <select id="id_usuario" name="id_usuario">
+			            	<c:if test="${requestScope.users != null}">
+			            	   <c:forEach var="user" items="${requestScope.users}" >
+			            	        <option value="${user.id}">ID:${user.id} - ${user.username}</option>
+			            	   </c:forEach>
+			            	</c:if>
+			            </select>       	
+		        	
+		        	
+			            <label for="rol">ROL: </label>
+			            <select id="rol" name="rol">			            	
+			            	<option value="SUPERVISOR">SUPERVISOR</option>
+			            </select>   
+			            
+			            <label for="articulo_id">Artículo: </label>
+			            <select id="articulo_id" name="articulo_id">
+			            	<c:if test="${requestScope.articulos != null}">
+			            	   <c:forEach var="articulo" items="${requestScope.articulos}" >
+			            	        <option value="${articulo.id}">ID:${articulo.id} - ${articulo.titulo}</option>
+			            	   </c:forEach>
+			            	</c:if>
+			            </select>        	
+		        	
+		        	    <input type="hidden" name="operacion" value="addRoleArticulo" />
 		        		<button type="submit">ASIGNAR ROL</button>
 		        	
 		        </form>
@@ -79,7 +117,7 @@
 	        <h2>Lista de usuarios:</h2>
 	          <c:if test="${requestScope.users != null}">
 	        	<table>
-		           <tr><th>ID</th><th>USERNAME</th><th>PASSWORD</th><th>ROLES</th><th></th><th></th></tr>
+		           <tr><th>ID</th><th>USERNAME</th><th>PASSWORD</th><th>ROLES (ACTIVOS)</th><th></th><th></th></tr>
 		           
 			        <c:forEach var="user" items="${requestScope.users}" >
 				         <tr>
@@ -99,9 +137,13 @@
 						        <table class="no-border">
 						            <c:if test="${user.roles != null}">
 							        	<c:forEach var="rol" items="${user.roles}">
+							        	   <c:if test="${rol.pendiente == false}">
 							        		<tr>
 							        			<td class="no-border">							        			    
-							        				ROL: ${rol.tipo} / WIKI: ${rol.wiki_id}
+							        				ROL: ${rol.tipo} /
+							        				<c:if test="${rol.wiki_id != 0}">WIKI: ${rol.wiki_id}</c:if>
+							        				<c:if test="${rol.articulo_id != 0}">ARTICULO: ${rol.articulo_id}</c:if>
+							        				 
 							        			</td>
 							        			<td class="no-border">
 							        			    <form action="${pageContext.request.contextPath}/users" method="post">
@@ -111,6 +153,7 @@
 							        				</form>
 							        			</td>
 							        		</tr> 
+							        		</c:if>
 							        	</c:forEach>
 						        	</c:if>
 						        </table>
