@@ -28,7 +28,7 @@ public class Wiki implements Serializable{
 	private String descripcion;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "wiki_id", foreignKey =@ForeignKey(name="FK_WIKI_ID"))
 	private List<Articulo> articulos = new ArrayList<Articulo>();
 	

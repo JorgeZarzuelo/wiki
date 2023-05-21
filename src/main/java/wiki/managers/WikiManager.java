@@ -2,16 +2,16 @@ package wiki.managers;
 
 import java.util.ArrayList;
 
+import wiki.DAO.ArticuloDAO;
+import wiki.DAO.RolDAO;
+import wiki.DAO.UserDAO;
+import wiki.DAO.WikiDAO;
+import wiki.VO.SolicitudVO;
 import wiki.entities.Articulo;
-import wiki.entities.ArticuloDAO;
 import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
-import wiki.entities.RolDAO;
-import wiki.entities.SolicitudVO;
 import wiki.entities.User;
-import wiki.entities.UserDAO;
 import wiki.entities.Wiki;
-import wiki.entities.WikiDAO;
 import wiki.utils.Tools;
 
 public class WikiManager {
@@ -72,6 +72,18 @@ public class WikiManager {
 		return user.isGestor();
 	}
 	
+	public boolean isUserCoordinador(User user) {
+		UserDAO userDAO = new UserDAO();
+		User current = userDAO.getUserByID(user.getId());		
+		return current.getRoles().stream().anyMatch(rol -> rol.getTipo().equals(Tipo.COORDINADOR));		
+	}
+	
+	public boolean isUserSupervisor(User user) {
+		UserDAO userDAO = new UserDAO();
+		User current = userDAO.getUserByID(user.getId());
+		return current.getRoles().stream().anyMatch(rol -> rol.getTipo().equals(Tipo.SUPERVISOR));		
+	}
+	
 	public ArrayList<User> getUserList(){
 		ArrayList<User> lista = null;
 		UserDAO userDAO = new UserDAO();
@@ -119,12 +131,12 @@ public class WikiManager {
 		userDAO.editarUser(currentUser);
 	}
 	
-	public void crearWiki (String topic, String descripcion) {
+	public Wiki crearWiki (String topic, String descripcion) {
 		Wiki wiki = new Wiki();
 		wiki.setTopic(topic);
 		wiki.setDescripcion(descripcion);
 		WikiDAO wikiDAO = new WikiDAO();
-		wikiDAO.crearWiki(wiki);
+		return wikiDAO.crearWiki(wiki);
 	}
 
 	public void editarWiki(String wiki_id, String topic, String descripcion) {
@@ -160,6 +172,41 @@ public class WikiManager {
 		RolDAO rolDAO = new RolDAO();
 		rolDAO.deleteRolById(Integer.parseInt(rol_id));			
 	}
+
+	public ArrayList<Wiki> getCoordinadorWikisList(User currentUser) {
+		ArrayList<Wiki> wikis = this.getWikisList();
+		ArrayList<Wiki> userWikis = new ArrayList<Wiki>();
+		wikis.forEach(wiki -> {
+			currentUser.getRoles().forEach( rol -> {
+				if (rol.getWiki_id() == wiki.getId()) {
+					userWikis.add(wiki);
+				}
+			});
+		});
+		return userWikis;
+	}
+	
+	public void crearArticulo(String wiki_id, String titulo, String contenido) {
+		Articulo articulo = new Articulo();
+		articulo.setTitulo(titulo);
+		articulo.setContenido(contenido);
+		WikiDAO wikiDAO = new WikiDAO();
+		Wiki currentWiki = wikiDAO.getWikiByID(Integer.parseInt(wiki_id));
+		currentWiki.getArticulos().add(articulo);
+		wikiDAO.editarWiki(currentWiki);		
+	}
+	
+	public void eliminarArticulo(String articulo_id) {
+		ArticuloDAO articuloDAO = new ArticuloDAO();
+		articuloDAO.eliminarArticuloPorID(Integer.parseInt(articulo_id));
+		// eliminamos roles vinculados a este artículo manualmente.
+		RolDAO rolDAO = new RolDAO();
+		rolDAO.deleteAllRolesByArticuloId(Integer.parseInt(articulo_id));
+	}
+
+
+
+
 
 
 

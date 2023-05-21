@@ -54,12 +54,23 @@ public class LoginController extends HttpServlet {
 			WikiManager manager = new WikiManager();
 			User currentUser = manager.loginUser(request.getParameter("username"), request.getParameter("password"));
 			if (currentUser != null) {
-				HttpSession session = request.getSession();				
+				HttpSession session = request.getSession();	
+				
+				// Cargamos al usuario en sesión.
 				session.setAttribute("user", currentUser);	
+				
+				// Cargamos en sesion una variable que identifica el rol o roles del usuario
+				// El rol de GESTOR se almacena en la entidad User y se crea en el arranque de la aplicación.
+				// El resto de roles tienen su propia tabla.
 				final boolean isGestor = manager.isUserGestor(currentUser);
 				session.setAttribute("isGestor", isGestor);
+				final boolean isCoordinador = manager.isUserCoordinador(currentUser);
+				session.setAttribute("isCoordinador", isCoordinador);
+				final boolean isSupervisor = manager.isUserSupervisor(currentUser);
+				session.setAttribute("isSupervisor", isSupervisor);
+				
 				request.setAttribute("mensaje", "Credenciales correctas");
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/login.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 				rd.forward(request, response);
 				
 			} else {

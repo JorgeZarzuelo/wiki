@@ -1,7 +1,8 @@
-package wiki.entities;
+package wiki.VO;
 
 import java.io.Serializable;
 
+import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
 
 public class SolicitudVO implements Serializable{

@@ -1,10 +1,11 @@
-package wiki.entities;
+package wiki.DAO;
 
 
 import java.util.ArrayList;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import wiki.entities.User;
 import wiki.managers.WikiEntityManager;
 
 public class UserDAO {

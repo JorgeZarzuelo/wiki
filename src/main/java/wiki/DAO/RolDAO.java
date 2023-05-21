@@ -1,4 +1,4 @@
-package wiki.entities;
+package wiki.DAO;
 
 
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import wiki.entities.Rol;
 import wiki.managers.WikiEntityManager;
 
 public class RolDAO {
@@ -117,6 +118,40 @@ public class RolDAO {
 		}
 		
 		return _rol;
+	}
+
+	public ArrayList<Rol> getAllRolesByUserId(int id) {
+		ArrayList<Rol> roles = null;
+		EntityManager em = WikiEntityManager.getEntityManager();		
+		try {
+			   Query query = em.createQuery("SELECT r FROM Rol r WHERE r.user_id = :id");
+			   query.setParameter("id", id);
+			   @SuppressWarnings("unchecked")
+			   ArrayList<Rol> found = (ArrayList<Rol>) query.getResultList();
+			   roles = found;
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return roles;
+		
+	}
+
+	public void deleteAllRolesByArticuloId(int articulo_id) {
+		EntityManager em = WikiEntityManager.getEntityManager();
+		em.getTransaction().begin();		
+		try {
+			   Query query = em.createQuery("DELETE FROM Rol r WHERE r.articulo_id = :articulo_id");
+			   query.setParameter("articulo_id", articulo_id).executeUpdate();
+			   em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
 	}
 	
 }

@@ -1,22 +1,23 @@
-package wiki.entities;
+package wiki.DAO;
 
 
 import java.util.ArrayList;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import wiki.entities.Articulo;
 import wiki.managers.WikiEntityManager;
 
-public class WikiDAO {
+public class ArticuloDAO {
 
 	
 	
-	public Wiki crearWiki(Wiki wiki) {
+	public Articulo crearArticulo(Articulo articulo) {
 		
 		EntityManager em = WikiEntityManager.getEntityManager();
 		em.getTransaction().begin();
 		try {
-			em.persist(wiki);
+			em.persist(articulo);
 			em.getTransaction().commit();
 		}catch (Exception e) {
 			em.getTransaction().rollback();
@@ -24,17 +25,17 @@ public class WikiDAO {
 		} finally {
 			em.close();
 		}
-		return wiki;
+		return articulo;
 	}
 	
-	public Wiki editarWiki(Wiki _wiki) {
+	public Articulo editarArticulo(Articulo _articulo) {
 		
 		EntityManager em = WikiEntityManager.getEntityManager();
 		em.getTransaction().begin();
 		try {
-			Wiki wiki = em.find(Wiki.class, _wiki.getId());
-			if (wiki != null) {
-				em.merge(_wiki);
+			Articulo articulo = em.find(Articulo.class, _articulo.getId());
+			if (articulo != null) {
+				em.merge(_articulo);
 				em.getTransaction().commit();
 			}
 			
@@ -45,17 +46,17 @@ public class WikiDAO {
 			em.close();
 		}
 		
-		return _wiki;
+		return _articulo;
 	}
 	
-	public void eliminarWikiPorID(Integer id) {
+	public void eliminarArticuloPorID(Integer id) {
 		
 		EntityManager em = WikiEntityManager.getEntityManager();
 		em.getTransaction().begin();
 		try {
-			Wiki wiki = em.find(Wiki.class, id);
-			if (wiki != null) {
-				em.remove(wiki);
+			Articulo articulo = em.find(Articulo.class, id);
+			if (articulo != null) {
+				em.remove(articulo);
 				em.getTransaction().commit();
 			}
 			
@@ -67,13 +68,13 @@ public class WikiDAO {
 		}
 	}
 	
-	public Wiki getWikiByID(Integer id) {
-		Wiki currentWiki = null;
+	public Articulo getArticuloByID(Integer id) {
+		Articulo currentArticulo = null;
 		EntityManager em = WikiEntityManager.getEntityManager();
 		try {
-			Wiki wiki = em.find(Wiki.class, id);
-			if(wiki != null) {				
-				currentWiki = wiki;
+			Articulo articulo = em.find(Articulo.class, id);
+			if(articulo != null) {				
+				currentArticulo = articulo;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -81,24 +82,24 @@ public class WikiDAO {
 			em.close();
 		}
 		
-		return currentWiki;
+		return currentArticulo;
 	}
-
-	public ArrayList<Wiki> getAllWikis() {
-		ArrayList<Wiki> wikis = null;
+	
+	public ArrayList<Articulo> getAllArticulos() {
+		ArrayList<Articulo> articulos = null;
 		EntityManager em = WikiEntityManager.getEntityManager();		
 		try {
-			   Query query = em.createQuery("SELECT e from Wiki e", Wiki.class);
+			   Query query = em.createQuery("SELECT e from Articulo e", Articulo.class);
 			   @SuppressWarnings("unchecked")
-			   ArrayList<Wiki> foundWikis = (ArrayList<Wiki>) query.getResultList();
-		       wikis = foundWikis;
+			   ArrayList<Articulo> found = (ArrayList<Articulo>) query.getResultList();
+			   articulos = found;
 		} catch (Exception e) {
 			e.printStackTrace();			
 		} finally {
 			em.close();
 		}
 		
-		return wikis;
+		return articulos;
 	}
 	
 

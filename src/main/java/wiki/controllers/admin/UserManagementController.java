@@ -1,4 +1,4 @@
-package wiki.controllers.usuarios;
+package wiki.controllers.admin;
 
 import java.io.IOException;
 

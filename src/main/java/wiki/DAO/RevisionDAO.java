@@ -1,9 +1,10 @@
-package wiki.entities;
+package wiki.DAO;
 
 
 
 
 import jakarta.persistence.EntityManager;
+import wiki.entities.Revision;
 import wiki.managers.WikiEntityManager;
 
 public class RevisionDAO {

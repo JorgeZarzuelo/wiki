@@ -1,4 +1,4 @@
-package wiki.controllers;
+package wiki.controllers.admin;
 
 import java.io.IOException;
 
@@ -8,23 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import wiki.entities.User;
 import wiki.managers.WikiManager;
 
 /**
- * Servlet implementation class WikisManagementController
+ * Servlet implementation class ArticulosManagementController
  */
 @WebServlet(
-		name="WikisManagementController",
-		value= {"/wikis"}
+		name="ArticulosManagementController",
+		value= {"/articulos"}
 		)
-public class WikisManagementController extends HttpServlet {
+public class ArticulosManagementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WikisManagementController() {
+    public ArticulosManagementController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +35,10 @@ public class WikisManagementController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		WikiManager manager = new WikiManager();		
-		request.setAttribute("wikis", manager.getWikisList());
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/admin/wikis.jsp");	
+		WikiManager manager = new WikiManager();
+		request.setAttribute("wikis", manager.getCoordinadorWikisList((User) request.getSession().getAttribute("user")));
+				
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/admin/articulos.jsp");	
 		rd.forward(request, response);
 	}
 
@@ -45,6 +47,7 @@ public class WikisManagementController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		if(    request.getParameter("operacion") != null 
 				&& !request.getParameter("operacion").isEmpty()) 
 		{
@@ -52,18 +55,20 @@ public class WikisManagementController extends HttpServlet {
 			switch(operacion) {
 			
 			case "crear":{
-				if (    request.getParameter("topic") != null 
-						&& !request.getParameter("topic").isEmpty()
-						&& request.getParameter("descripcion") != null 
-						&& !request.getParameter("descripcion").isEmpty()
+				if (    request.getParameter("wiki_id") != null 
+						&& !request.getParameter("wiki_id").isEmpty()
+						&& request.getParameter("titulo") != null 
+						&& !request.getParameter("titulo").isEmpty()
+						&& request.getParameter("contenido") != null 
+						&& !request.getParameter("contenido").isEmpty()
 						) {
 					WikiManager manager = new WikiManager();
-					manager.crearWiki(request.getParameter("topic"), request.getParameter("descripcion"));
-					request.setAttribute("mensaje", "Wiki creada");	
+					manager.crearArticulo(request.getParameter("wiki_id"), request.getParameter("titulo"), request.getParameter("contenido"));
+					request.setAttribute("mensaje", "Artículo creado");	
 					
 					doGet(request, response);
 				} else {
-					request.setAttribute("mensaje", "Error: Debe introducir un topic y una descripción");
+					request.setAttribute("mensaje", "Error: Debe introducir un título y descripción");
 					doGet(request, response);
 				}
 			} break;
@@ -90,12 +95,12 @@ public class WikisManagementController extends HttpServlet {
 			
 			case "eliminar":{
 				
-				if (    request.getParameter("wiki_id") != null 
-						&& !request.getParameter("wiki_id").isEmpty()
+				if (    request.getParameter("articulo_id") != null 
+						&& !request.getParameter("articulo_id").isEmpty()
 						) {
 					WikiManager manager = new WikiManager();
-					manager.eliminarWiki(request.getParameter("wiki_id"));
-					request.setAttribute("mensaje", "Wiki eliminada");
+					manager.eliminarArticulo(request.getParameter("articulo_id"));
+					request.setAttribute("mensaje", "Artículo eliminado");
 					doGet(request, response);
 				}
 			} break;

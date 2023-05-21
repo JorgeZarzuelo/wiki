@@ -2,9 +2,9 @@ package wiki.utils;
 
 import java.util.ArrayList;
 
+import wiki.VO.SolicitudVO;
 import wiki.entities.Articulo;
 import wiki.entities.Rol.Tipo;
-import wiki.entities.SolicitudVO;
 import wiki.entities.User;
 import wiki.entities.Wiki;
 

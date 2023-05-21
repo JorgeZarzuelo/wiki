@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>WIKI UNED - TW</title>
+<title>WIKI - TECNOLOGIAS WEB</title>
 <link href="styles.css" rel="stylesheet" type="text/css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -20,7 +20,7 @@
   
     <span class="user-info">
     	<c:if test="${sessionScope.user != null}">  
-    		Usuario logueado:  ${sessionScope.user.username} - ID: ${sessionScope.user.id} - SessionID: ${pageContext.session.id} 
+    		Usuario logueado:  ${sessionScope.user.username} - ID: ${sessionScope.user.id} - SessionID: ${pageContext.session.id}
     	</c:if>
     </span>
     
@@ -40,6 +40,9 @@
 		   <li><a href="${pageContext.request.contextPath}/solicitudes">Solicitudes</a></li>
 		</c:if>
 		
+		<c:if test="${sessionScope.isCoordinador == true }"> 
+		   <li><a href="${pageContext.request.contextPath}/articulos">Articulos</a></li>
+		</c:if>
 		
 		<c:if test="${sessionScope.user != null}"> 
 		   <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
