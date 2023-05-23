@@ -3,6 +3,7 @@ package wiki.utils;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import wiki.VO.RolVO;
 import wiki.VO.SolicitudVO;
 import wiki.entities.Articulo;
 import wiki.entities.Rol.Tipo;
@@ -148,6 +149,37 @@ public class Tools {
 		
 		
 		return allCoordinador;
+	}
+	
+	public static ArrayList<RolVO> populateUserRolVO(User user, ArrayList<Wiki> wikis, ArrayList<Articulo> articulos){
+		ArrayList<RolVO> userRoles = new ArrayList<RolVO>();
+		
+	    user.getRoles().forEach(rol -> {
+	    	RolVO currentRol = new RolVO();
+	    		currentRol.setUsername(user.getUsername());
+	    		currentRol.setPendiente(rol.isPendiente());
+	    		currentRol.setRol_id(rol.getId());
+	    		currentRol.setTipoSolicitud(rol.getTipo());
+	    		if (rol.getArticulo_id() != 0) {
+	    			currentRol.setArticulo_id(rol.getArticulo_id());
+	    			articulos.forEach(articulo -> {
+						if(articulo.getId() == rol.getArticulo_id()) {
+							currentRol.setTitulo_articulo(articulo.getTitulo());
+						}
+					});
+	    		}
+	    		if (rol.getWiki_id() != 0) {
+	    			currentRol.setWiki_id(rol.getWiki_id());
+	    			wikis.forEach(wiki -> {
+						if(wiki.getId() == rol.getWiki_id()) {
+							currentRol.setTopic_wiki(wiki.getTopic());
+						}
+					});
+	    		}
+	    });
+		
+		
+		return userRoles;
 	}
 	
 	
