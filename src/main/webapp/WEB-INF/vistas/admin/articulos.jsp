@@ -55,7 +55,13 @@
 		        			 <tr>
 		        				<td>${articulo.id}</td>		        				
 			        			<td>${articulo.titulo}</td>				        			
-			        			<td><button type="submit">EDITAR</button></td>		        				
+			        			<td>
+			        			    <form action="${pageContext.request.contextPath}/editar_articulo" method="get">
+				        				<input type="hidden" name="articulo_id" value="${articulo.id}" />
+				        				<input type="hidden" name="operacion" value="editar" />
+				        				<button  type="submit">EDITAR</button>
+				        			 </form>
+			        			</td>		        				
 		        				<td>
 		        				     <form action="${pageContext.request.contextPath}/articulos" method="post">
 				        				<input type="hidden" name="articulo_id" value="${articulo.id}" />

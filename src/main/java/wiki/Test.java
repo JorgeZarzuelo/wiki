@@ -3,11 +3,6 @@ package wiki;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import wiki.DAO.ArticuloDAO;
-import wiki.DAO.UserDAO;
-import wiki.DAO.WikiDAO;
-import wiki.entities.Articulo;
-import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
 import wiki.entities.User;
 import wiki.entities.Wiki;
@@ -32,6 +27,7 @@ public class Test implements ServletContextListener {
 		
 		manager.crearArticulo(String.valueOf(wikiJavaEE.getId()), "Servlets", "<h1>Los servlets</h1> <p>Procesan peticiones post y get entre otras y delegan normalmente a un archivo jsp la presentación</p>");
 		manager.crearArticulo(String.valueOf(wikiJavaEE.getId()), "JSP", "<h1>Vistas con JSP</h1> <p>Forman la capa de presentación del modelo MVC</p>");
+		manager.crearArticulo(String.valueOf(wikiJavaSE.getId()), "Intro", "<h1>JAVA SE</h1> <p>Java para aplicaciones de escritorio</p>");
 	   
 	    
 	    

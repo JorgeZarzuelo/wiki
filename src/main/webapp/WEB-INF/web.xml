@@ -40,7 +40,8 @@
   
   <filter-mapping>
   		<filter-name>OnlyCoordinadorFilter</filter-name>
-  		<servlet-name>ArticulosManagementController</servlet-name>  		
+  		<servlet-name>ArticulosManagementController</servlet-name>  
+  		<servlet-name>EditarArticulo</servlet-name> 		
   		<dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   

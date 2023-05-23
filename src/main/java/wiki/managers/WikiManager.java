@@ -204,6 +204,20 @@ public class WikiManager {
 		rolDAO.deleteAllRolesByArticuloId(Integer.parseInt(articulo_id));
 	}
 
+	public Articulo getArticuloByID(String articulo_id) {
+		ArticuloDAO articuloDAO = new ArticuloDAO();
+		return (Articulo) articuloDAO.getArticuloByID(Integer.parseInt(articulo_id));		
+	}
+
+	public void editarArticulo(String articulo_id, String titulo, String contenido) {
+		ArticuloDAO articuloDAO = new ArticuloDAO();
+		Articulo currentArticulo = articuloDAO.getArticuloByID(Integer.parseInt(articulo_id));
+		currentArticulo.setTitulo(titulo);
+		currentArticulo.setContenido(contenido);
+		articuloDAO.editarArticulo(currentArticulo);
+		
+	}
+
 
 
 
