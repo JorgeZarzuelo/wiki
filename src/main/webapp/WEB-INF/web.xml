@@ -41,7 +41,23 @@
   <filter-mapping>
   		<filter-name>OnlyCoordinadorFilter</filter-name>
   		<servlet-name>ArticulosManagementController</servlet-name>  
-  		<servlet-name>EditarArticulo</servlet-name> 		
+  		<servlet-name>EditarArticulo</servlet-name> 	
+  		<servlet-name>SolicitudesCoordinadorManagementController</servlet-name>
+  		<dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  
+  
+  <filter>
+  		<description>Filtro para usuarios logueados</description>
+  		<filter-name>LoggedInFilter</filter-name>
+  		<filter-class>
+  			wiki.filters.LoggedInFilter
+  		</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  		<filter-name>LoggedInFilter</filter-name>
+  		<servlet-name>MisRolesController</servlet-name>   
   		<dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   

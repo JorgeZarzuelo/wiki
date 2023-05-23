@@ -17,6 +17,7 @@ public class Test implements ServletContextListener {
 		
 		User coordinador = manager.crearCuenta("coordinador", "1234");
 		User supervisor  = manager.crearCuenta("supervisor", "1234");
+		User user1 = manager.crearCuenta("user1", "1234");
 		
 		Wiki wikiJavaEE = manager.crearWiki("JAVA EE", "Todo sobre esta especificacion de java orientada a las aplicaciones empresariales en la web.");
 		Wiki wikiJavaSE = manager.crearWiki("JAVA SE", "Java para aplicaciones de escritorio.");
@@ -29,7 +30,9 @@ public class Test implements ServletContextListener {
 		manager.crearArticulo(String.valueOf(wikiJavaEE.getId()), "JSP", "<h1>Vistas con JSP</h1> <p>Forman la capa de presentación del modelo MVC</p>");
 		manager.crearArticulo(String.valueOf(wikiJavaSE.getId()), "Intro", "<h1>JAVA SE</h1> <p>Java para aplicaciones de escritorio</p>");
 	   
-	    
+	    manager.solicitarRol(Tipo.SUPERVISOR, "wiki", 1, user1.getId());
+	    manager.solicitarRol(Tipo.SUPERVISOR, "articulo", 1, user1.getId());
+	    manager.solicitarRol(Tipo.SUPERVISOR, "articulo", 3, user1.getId());
 	    
 		System.out.println("TEST: Test finalizados");
 	}

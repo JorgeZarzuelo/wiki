@@ -27,7 +27,7 @@
 	<ul>
 	
 		<li><a href="${pageContext.request.contextPath}/">Inicio</a></li>
-		
+						
 		<c:if test="${sessionScope.isGestor == true }"> 
 		   <li><a href="${pageContext.request.contextPath}/users">Usuarios</a></li>
 		</c:if>
@@ -41,7 +41,15 @@
 		</c:if>
 		
 		<c:if test="${sessionScope.isCoordinador == true }"> 
+		   <li><a href="${pageContext.request.contextPath}/solicitudes_coordinador">Solicitudes</a></li>
+		</c:if>
+		
+		<c:if test="${sessionScope.isCoordinador == true }"> 
 		   <li><a href="${pageContext.request.contextPath}/articulos">Articulos</a></li>
+		</c:if>
+		
+		<c:if test="${sessionScope.isLoggedIn == true }"> 
+		   <li><a href="${pageContext.request.contextPath}/mis_roles">Mis Roles</a></li>
 		</c:if>
 		
 		<c:if test="${sessionScope.user != null}"> 

@@ -68,6 +68,8 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("isCoordinador", isCoordinador);
 				final boolean isSupervisor = manager.isUserSupervisor(currentUser);
 				session.setAttribute("isSupervisor", isSupervisor);
+				final boolean isLoggedIn = true;
+				session.setAttribute("isLoggedIn", isLoggedIn);
 				
 				request.setAttribute("mensaje", "Credenciales correctas");
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");

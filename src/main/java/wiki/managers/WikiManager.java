@@ -160,6 +160,13 @@ public class WikiManager {
 		solicitudes = Tools.populateSolicitudVO(this.getUserList(), this.getWikisList(), this.getArticulosList());
 		return solicitudes;
 	}
+	
+	public Object getSolicitudesCoordinadorVO(User user) {
+		ArrayList<SolicitudVO> solicitudes = null;			
+		solicitudes = Tools.populateSolicitudVO(user ,this.getUserList(), this.getWikisList(), this.getArticulosList());
+		return solicitudes;
+	}
+
 
 	public void aprobarRol(String rol_id) {
 		RolDAO rolDAO = new RolDAO();
@@ -217,6 +224,28 @@ public class WikiManager {
 		articuloDAO.editarArticulo(currentArticulo);
 		
 	}
+
+	public void solicitarRol(Tipo rol_type, String item_type, int item_id, int user_id) {
+		
+		UserDAO userDAO = new UserDAO();
+		User currentUser = userDAO.getUserByID(user_id);
+		
+		Rol newRol = new Rol();
+		newRol.setTipo(rol_type);
+		newRol.setPendiente(true);		
+		
+		if (item_type.equals("wiki")) {
+			newRol.setWiki_id(item_id);
+		}
+		if (item_type.equals("articulo")) {
+			newRol.setArticulo_id(item_id);
+		}
+		
+		currentUser.getRoles().add(newRol);
+		userDAO.editarUser(currentUser);
+		
+	}
+
 
 
 
