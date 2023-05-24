@@ -152,8 +152,7 @@ public class Tools {
 	}
 	
 	public static ArrayList<RolVO> populateUserRolVO(User user, ArrayList<Wiki> wikis, ArrayList<Articulo> articulos){
-		ArrayList<RolVO> userRoles = new ArrayList<RolVO>();
-		
+		ArrayList<RolVO> userRoles = new ArrayList<RolVO>();		
 	    user.getRoles().forEach(rol -> {
 	    	RolVO currentRol = new RolVO();
 	    		currentRol.setUsername(user.getUsername());
@@ -176,6 +175,7 @@ public class Tools {
 						}
 					});
 	    		}
+	    		userRoles.add(currentRol);
 	    });
 		
 		

@@ -48,7 +48,7 @@
 		   <li><a href="${pageContext.request.contextPath}/articulos">Articulos</a></li>
 		</c:if>
 		
-		<c:if test="${sessionScope.isLoggedIn == true }"> 
+		<c:if test="${sessionScope.isLoggedIn == true && sessionScope.isGestor == false}"> 
 		   <li><a href="${pageContext.request.contextPath}/mis_roles">Mis Roles</a></li>
 		</c:if>
 		

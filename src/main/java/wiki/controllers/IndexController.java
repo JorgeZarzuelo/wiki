@@ -2,6 +2,7 @@ package wiki.controllers;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,15 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 /**
  * Servlet implementation class IndexController
  */
 @WebServlet(
 		name="IndexController",
-		value= {"/vistas"}
+		urlPatterns = {"/index.jsp" , "/"}
 		)
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
        
     /**
      * @see HttpServlet#HttpServlet()

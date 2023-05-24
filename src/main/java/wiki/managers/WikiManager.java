@@ -6,6 +6,7 @@ import wiki.DAO.ArticuloDAO;
 import wiki.DAO.RolDAO;
 import wiki.DAO.UserDAO;
 import wiki.DAO.WikiDAO;
+import wiki.VO.RolVO;
 import wiki.VO.SolicitudVO;
 import wiki.entities.Articulo;
 import wiki.entities.Rol;
@@ -75,13 +76,13 @@ public class WikiManager {
 	public boolean isUserCoordinador(User user) {
 		UserDAO userDAO = new UserDAO();
 		User current = userDAO.getUserByID(user.getId());		
-		return current.getRoles().stream().anyMatch(rol -> rol.getTipo().equals(Tipo.COORDINADOR));		
+		return current.getRoles().stream().anyMatch(rol -> rol.getTipo().equals(Tipo.COORDINADOR) && rol.isPendiente() == false);		
 	}
 	
 	public boolean isUserSupervisor(User user) {
 		UserDAO userDAO = new UserDAO();
 		User current = userDAO.getUserByID(user.getId());
-		return current.getRoles().stream().anyMatch(rol -> rol.getTipo().equals(Tipo.SUPERVISOR));		
+		return current.getRoles().stream().anyMatch(rol -> rol.getTipo().equals(Tipo.SUPERVISOR) && rol.isPendiente() == false);		
 	}
 	
 	public ArrayList<User> getUserList(){
@@ -161,7 +162,16 @@ public class WikiManager {
 		return solicitudes;
 	}
 	
-	public Object getSolicitudesCoordinadorVO(User user) {
+	public ArrayList<RolVO> getRolesVO(User _user) {
+		//me traigo el usuario otra vez de la bbdd porque el que tengo en sesion no tiene los roles actualizados si he añadido alguno
+		UserDAO userDAO = new UserDAO();
+		User user = userDAO.getUserByID(_user.getId());
+		ArrayList<RolVO> roles = null;			
+		roles = Tools.populateUserRolVO(user, this.getWikisList(), this.getArticulosList());
+		return roles;
+	}
+	
+	public ArrayList<SolicitudVO> getSolicitudesCoordinadorVO(User user) {
 		ArrayList<SolicitudVO> solicitudes = null;			
 		solicitudes = Tools.populateSolicitudVO(user ,this.getUserList(), this.getWikisList(), this.getArticulosList());
 		return solicitudes;
@@ -225,26 +235,38 @@ public class WikiManager {
 		
 	}
 
-	public void solicitarRol(Tipo rol_type, String item_type, int item_id, int user_id) {
+	public boolean solicitarRol(Tipo rol_type, String item_type, int item_id, int user_id) {
 		
 		UserDAO userDAO = new UserDAO();
 		User currentUser = userDAO.getUserByID(user_id);
+	   
+		// Comprobamos que el usuario no tenga ya ese rol
+		boolean foundArticle = currentUser.getRoles().stream().anyMatch(rol -> item_type.equals("articulo") && rol.getArticulo_id() == item_id);
+		boolean foundWiki = currentUser.getRoles().stream().anyMatch(rol -> item_type.equals("wiki") && rol.getArticulo_id() == item_id);
 		
-		Rol newRol = new Rol();
-		newRol.setTipo(rol_type);
-		newRol.setPendiente(true);		
-		
-		if (item_type.equals("wiki")) {
-			newRol.setWiki_id(item_id);
+		if (!foundArticle && !foundWiki) {
+			Rol newRol = new Rol();
+			newRol.setTipo(rol_type);
+			newRol.setPendiente(true);		
+			
+			if (item_type.equals("wiki")) {
+				newRol.setWiki_id(item_id);
+			}
+			if (item_type.equals("articulo")) {
+				newRol.setArticulo_id(item_id);
+			}
+			
+			currentUser.getRoles().add(newRol);
+			userDAO.editarUser(currentUser);
+			return true;
+		} else {
+			return false;
 		}
-		if (item_type.equals("articulo")) {
-			newRol.setArticulo_id(item_id);
-		}
 		
-		currentUser.getRoles().add(newRol);
-		userDAO.editarUser(currentUser);
 		
 	}
+
+
 
 
 
