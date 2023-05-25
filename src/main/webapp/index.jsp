@@ -3,6 +3,6 @@
 
 <t:public_page>    
     <jsp:body>
-        <p>Hi I'm the heart of the message</p>
+        <p>index</p>
     </jsp:body>
 </t:public_page>

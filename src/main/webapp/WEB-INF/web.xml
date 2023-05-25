@@ -65,6 +65,11 @@
   		<error-code>401</error-code>
   		<location>/WEB-INF/vistas/errors/401.jsp</location>
   </error-page>
+  
+  <servlet-mapping>
+   <servlet-name>default</servlet-name>
+   <url-pattern>*.css</url-pattern>
+</servlet-mapping>
 
   
 

@@ -18,10 +18,10 @@ import wiki.managers.WikiManager;
  * Servlet implementation class IndexController
  */
 @WebServlet(
-		name="IndexController",
-		urlPatterns = {"/index.jsp" , "/"}
+		name="ArticuloController",
+				value= {"/articulo"}
 		)
-public class IndexController extends HttpServlet {
+public class ArticuloController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -29,7 +29,7 @@ public class IndexController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexController() {
+    public ArticuloController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,8 +40,8 @@ public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		WikiManager manager = new WikiManager();
-		request.setAttribute("wikis", manager.getWikisList());
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/index.jsp");
+		request.setAttribute("articulo", manager.getArticuloByID(request.getParameter("id")));		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/articulo.jsp");
 		rd.forward(request, response);
 	}
 

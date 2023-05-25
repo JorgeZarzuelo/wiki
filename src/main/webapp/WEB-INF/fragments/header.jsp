@@ -2,13 +2,13 @@
     pageEncoding="utf-8"%>
   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-
+<c:set var="context" value="${pageContext.request.contextPath}" /> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WIKI - TECNOLOGIAS WEB</title>
-<link href="styles.css" rel="stylesheet" type="text/css">
+<link href="${context}/styles.css" rel="stylesheet" type="text/css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>

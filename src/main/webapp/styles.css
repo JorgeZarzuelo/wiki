@@ -121,6 +121,24 @@ tr.border {
 .long600px {
 	width: 600px;
 }
+.wiki{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+.wiki h2{
+	background-color: #FFC857;
+	color: #1F2041;
+	padding: 4px;
+}
+.articulo h1.header{
+	background-color: #119DA4;
+	color: white;
+	padding: 4px;
+	text-align: center;
+}
+
 
 
 
