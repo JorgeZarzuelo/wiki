@@ -9,6 +9,7 @@ import wiki.DAO.WikiDAO;
 import wiki.VO.RolVO;
 import wiki.VO.SolicitudVO;
 import wiki.entities.Articulo;
+import wiki.entities.Revision;
 import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
 import wiki.entities.User;
@@ -263,6 +264,17 @@ public class WikiManager {
 			return false;
 		}
 		
+		
+	}
+
+	public void creaRevision(User currentUser, String articulo_id, String edited) {
+		Revision revision = new Revision();
+		revision.setArticulo_id(Integer.parseInt(articulo_id));
+		revision.setPropuesta(edited);
+		revision.setPendiente(true);
+		currentUser.getRevisiones().add(revision);
+		UserDAO userDAO = new UserDAO();
+		userDAO.editarUser(currentUser);
 		
 	}
 

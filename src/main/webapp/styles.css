@@ -31,7 +31,16 @@ body {
 	padding-right:50px;
 	background-color: #19647E;
 }
-.menu li{
+
+.menu-edicion ul{
+  list-style-type: none;
+  padding: 10px;
+}
+.menu-edicion li{
+  margin-top: 5px;
+}
+
+.menu li {
 	display:inline;
     padding-left:6px;
     padding-right:3px;
@@ -137,6 +146,30 @@ tr.border {
 	color: white;
 	padding: 4px;
 	text-align: center;
+}
+
+.propuesta{
+	margin-top: 40px;
+	padding: 20px;
+	border: 2px dashed #1F2041;
+}
+
+ a.atras{
+    display: inline-block;
+	text-decoration: none;
+	padding: 4px;
+	margin:2px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	border: 1px solid #FFC857;
+	color: #FFC857;
+	background-color: #1F2041;
+}
+ a.atras:hover{
+	
+	border: 1px solid white;
+	color: white;
+	background-color: #323369;
 }
 
 

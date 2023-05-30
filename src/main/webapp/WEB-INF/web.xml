@@ -41,7 +41,7 @@
   <filter-mapping>
   		<filter-name>OnlyCoordinadorFilter</filter-name>
   		<servlet-name>ArticulosManagementController</servlet-name>  
-  		<servlet-name>EditarArticulo</servlet-name> 	
+  		<servlet-name>EditarArticulo</servlet-name>   			
   		<servlet-name>SolicitudesCoordinadorManagementController</servlet-name>
   		<dispatcher>REQUEST</dispatcher>
   </filter-mapping>
@@ -57,7 +57,9 @@
   
   <filter-mapping>
   		<filter-name>LoggedInFilter</filter-name>
-  		<servlet-name>MisRolesController</servlet-name>   
+  		<servlet-name>MisRolesController</servlet-name> 
+  		<servlet-name>PropuestaHTMLController</servlet-name>  
+  		<servlet-name>PropuestasController</servlet-name> 
   		<dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   

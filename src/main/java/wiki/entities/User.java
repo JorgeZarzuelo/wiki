@@ -32,7 +32,7 @@ public class User implements Serializable{
 	@JoinColumn(name = "user_id", foreignKey =@ForeignKey(name="FK_USER_ID"))
 	private List<Rol> roles = new ArrayList<Rol>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", foreignKey =@ForeignKey(name="FK_REVISION_USER_ID"))
 	private List<Revision> revisiones = new ArrayList<Revision>();
 

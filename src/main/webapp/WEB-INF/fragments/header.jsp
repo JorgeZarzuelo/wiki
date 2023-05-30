@@ -52,6 +52,10 @@
 		   <li><a href="${pageContext.request.contextPath}/mis_roles">Mis Roles</a></li>
 		</c:if>
 		
+		<c:if test="${sessionScope.isLoggedIn == true && sessionScope.isGestor == false}"> 
+		   <li><a href="${pageContext.request.contextPath}/mis_propuestas">Mis propuestas</a></li>
+		</c:if>
+		
 		<c:if test="${sessionScope.user != null}"> 
 		   <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</c:if>

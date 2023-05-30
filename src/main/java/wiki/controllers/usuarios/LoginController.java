@@ -72,7 +72,7 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("isLoggedIn", isLoggedIn);
 				
 				request.setAttribute("mensaje", "Credenciales correctas");
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vistas/index.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/wiki");
 				rd.forward(request, response);
 				
 			} else {
