@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WIKI - TECNOLOGIAS WEB</title>
 <link href="${context}/styles.css" rel="stylesheet" type="text/css">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/x-icon" href="${context}/favicon.ico">
 </head>
 <body>
 <div class="top_banner">
@@ -54,6 +54,10 @@
 		
 		<c:if test="${sessionScope.isLoggedIn == true && sessionScope.isGestor == false}"> 
 		   <li><a href="${pageContext.request.contextPath}/mis_propuestas">Mis propuestas</a></li>
+		</c:if>
+		
+		<c:if test="${sessionScope.isSupervisor == true}"> 
+		   <li><a href="${pageContext.request.contextPath}/mis_propuestas">Supervisar</a></li>
 		</c:if>
 		
 		<c:if test="${sessionScope.user != null}"> 
