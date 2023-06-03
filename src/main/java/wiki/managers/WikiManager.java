@@ -3,17 +3,21 @@ package wiki.managers;
 import java.util.ArrayList;
 
 import wiki.DAO.ArticuloDAO;
+import wiki.DAO.RevisionDAO;
 import wiki.DAO.RolDAO;
 import wiki.DAO.UserDAO;
 import wiki.DAO.WikiDAO;
+import wiki.VO.ConcreteSupervisionVO;
 import wiki.VO.RolVO;
 import wiki.VO.SolicitudVO;
+import wiki.VO.SupervisionVO;
 import wiki.entities.Articulo;
 import wiki.entities.Revision;
 import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
 import wiki.entities.User;
 import wiki.entities.Wiki;
+import wiki.services.HTMLComparatorService;
 import wiki.utils.Tools;
 
 public class WikiManager {
@@ -277,18 +281,50 @@ public class WikiManager {
 		userDAO.editarUser(currentUser);
 		
 	}
-
-
-
-
-
-
-
-
-
-
 	
-
-
+	public ArrayList<Revision> getRevisionesList() {
+		ArrayList<Revision> lista = null;
+		RevisionDAO revisionDAO = new RevisionDAO();
+		lista = revisionDAO.getAllRevisiones();
+		return lista;
+	}
 	
+	
+	public ArrayList<SupervisionVO> getUserRevisionsList(User currentUser) {
+		UserDAO userDAO = new UserDAO();
+		User current = userDAO.getUserByID(currentUser.getId());
+		ArrayList<SupervisionVO> supervisiones = Tools.populateSupervisionVO(current, getWikisList(), getRevisionesList(), getUserList(), getArticulosList());		
+		return supervisiones;
+	}
+	
+	public void eliminarRevision(int revision_id) {
+		RevisionDAO revisionDAO = new RevisionDAO();
+		revisionDAO.eliminarRevisionByID(revision_id);
+	}
+	
+	public ConcreteSupervisionVO getConcreteSupervisionVO(int user_id, int revision_id) {
+		UserDAO userDAO = new UserDAO();
+		User currentUser = userDAO.getUserByID(user_id);
+		Revision currentRevision = new Revision();
+		
+		for (Revision revision : currentUser.getRevisiones()) {
+			if (revision.getId() == revision_id) {
+				currentRevision = revision;
+			}	
+		}			
+		
+		ArticuloDAO articuloDAO = new ArticuloDAO();
+		Articulo currentArticulo = articuloDAO.getArticuloByID(currentRevision.getArticulo_id());
+		
+		HTMLComparatorService comparatorService = new HTMLComparatorService();
+		comparatorService.compare(currentArticulo.getContenido(), currentRevision.getPropuesta());		
+				
+		ConcreteSupervisionVO concreteSupervisionVO = Tools.populateConcreteSupervisionVO( currentUser , currentRevision , currentArticulo , comparatorService );
+		
+		return concreteSupervisionVO;
+		
+	}
+
+
+		
 }

@@ -30,8 +30,11 @@ public class Test implements ServletContextListener {
 		
 		manager.addRolWiki(String.valueOf(coordinador.getId()), Tipo.COORDINADOR.toString(), String.valueOf(wikiJavaEE.getId()));
 		manager.addRolWiki(String.valueOf(supervisor.getId()), Tipo.SUPERVISOR.toString(), String.valueOf(wikiHTML.getId()));
+		manager.addRolWiki(String.valueOf(supervisor.getId()), Tipo.SUPERVISOR.toString(), String.valueOf(wikiJavaEE.getId()));
+		manager.addRolWiki(String.valueOf(supervisor.getId()), Tipo.SUPERVISOR.toString(), String.valueOf(wikiJavaSE.getId()));
 		
-		manager.crearArticulo(String.valueOf(wikiJavaEE.getId()), "Servlets", "<h1>Los servlets</h1> <p>Procesan peticiones post y get entre otras y delegan normalmente a un archivo jsp la presentación</p>");
+				
+		manager.crearArticulo(String.valueOf(wikiJavaEE.getId()), "Servlets", "<h1>Los servlets</h1><p>Procesan peticiones post y get entre otras y delegan normalmente a un archivo jsp la presentación</p>");
 		manager.crearArticulo(String.valueOf(wikiJavaEE.getId()), "JSP", "<h1>Vistas con JSP</h1> <p>Forman la capa de presentación del modelo MVC</p>");
 		manager.crearArticulo(String.valueOf(wikiJavaSE.getId()), "Intro", "<h1>JAVA SE</h1> <p>Java para aplicaciones de escritorio</p>");
 	   
@@ -39,20 +42,21 @@ public class Test implements ServletContextListener {
 	    manager.solicitarRol(Tipo.SUPERVISOR, "articulo", 1, user1.getId());
 	    manager.solicitarRol(Tipo.SUPERVISOR, "articulo", 3, user1.getId());
 	    
-	    manager.creaRevision(user1, "1", "<p>Procesan peticiones post y get entre otras y delegan normalmente a un archivo jsp la presentación</p>");
+	    manager.creaRevision(user1, "1", "<h1>Los servlets</h1><p>Procesan peticiones post y get entre otras y delegan normalmente a un archivo jsp la presentación, y han caido en desgracia por los frameworks</p>");
 	    
 	    HTMLComparatorService htmlComparator = new HTMLComparatorService();
 	    htmlComparator.compare("<p>este es el primero </p><p>este es el segundo</p>", "<p>este es el prime</p><p>este es el segundo</p><p>este es el tercero</p><p>este es el cuarto</p>");
-	    int lista[] = {0,1,2,3};
+	    int lista[] = {3};
 	    htmlComparator.doOperations(lista);
 	    
 	    Arrays.asList(htmlComparator.getFinalParts()).forEach(part ->{
 	    	System.out.println("PARTE:: " + part);
 	    });
 	    
-	    //operaciones.forEach(operacion -> {
-	    //	System.out.println("Index f: " + operacion.getFinalPosition() +" Index: i: " + operacion.getInitialPosition() + " Operacion " + operacion.getOperacion() +  " Fragmento antiguo: " + operacion.getHtmlOriginal() + " Fragmento Propuesto " + operacion.getHtmlPropuesto());
-	    //});
+	    manager.getUserRevisionsList(supervisor).forEach(  revision ->{
+	    	System.out.println("REVISION: " + revision.getId() + " solicitada por:  " + revision.getUsername() + " sobre el artículo: " + revision.getTitulo_articulo());
+	    });
+	    
 	    
 		System.out.println("TEST: Test finalizados");
 	}

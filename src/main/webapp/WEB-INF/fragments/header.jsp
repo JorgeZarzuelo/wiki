@@ -57,7 +57,7 @@
 		</c:if>
 		
 		<c:if test="${sessionScope.isSupervisor == true}"> 
-		   <li><a href="${pageContext.request.contextPath}/mis_propuestas">Supervisar</a></li>
+		   <li><a href="${pageContext.request.contextPath}/revisiones">Supervisar</a></li>
 		</c:if>
 		
 		<c:if test="${sessionScope.user != null}"> 

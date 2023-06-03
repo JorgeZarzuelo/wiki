@@ -3,8 +3,13 @@ package wiki.DAO;
 
 
 
+import java.util.ArrayList;
+
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import wiki.entities.Articulo;
 import wiki.entities.Revision;
+import wiki.entities.Rol;
 import wiki.managers.WikiEntityManager;
 
 public class RevisionDAO {
@@ -48,7 +53,40 @@ public class RevisionDAO {
 		}
 	}
 	
-
+	public ArrayList<Revision> getAllRevisiones() {
+		ArrayList<Revision> revisiones = null;
+		EntityManager em = WikiEntityManager.getEntityManager();		
+		try {
+			   Query query = em.createQuery("SELECT e from Revision e", Revision.class);
+			   @SuppressWarnings("unchecked")
+			   ArrayList<Revision> found = (ArrayList<Revision>) query.getResultList();
+			   revisiones = found;
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return revisiones;
+	}
+	
+	public void eliminarRevisionByID(Integer revision_id) {
+		
+		EntityManager em = WikiEntityManager.getEntityManager();
+		em.getTransaction().begin();
+		try {
+			Revision currentRevision = em.find(Revision.class, revision_id);			
+			if (currentRevision != null) {
+				em.remove(currentRevision);
+				em.getTransaction().commit();
+			}			
+		}catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+	}
 	
 
 	

@@ -63,6 +63,21 @@
   		<dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   
+  <filter>
+  		<description>Filtro para Supervisores</description>
+  		<filter-name>OnlySupervisorFilter</filter-name>
+  		<filter-class>
+  			wiki.filters.OnlySupervisorFilter
+  		</filter-class>
+  </filter>
+  
+    <filter-mapping>
+  		<filter-name>OnlySupervisorFilter</filter-name>  		
+  		<servlet-name>SupervisionesManagementController</servlet-name> 
+  		<servlet-name>SupervisionManagementController</servlet-name>
+  		<dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  
   <error-page>
   		<error-code>401</error-code>
   		<location>/WEB-INF/vistas/errors/401.jsp</location>

@@ -5,12 +5,18 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.Part;
 
+import wiki.VO.ConcreteSupervisionVO;
 import wiki.VO.RolVO;
 import wiki.VO.SolicitudVO;
+import wiki.VO.SupervisionVO;
 import wiki.entities.Articulo;
+import wiki.entities.Revision;
+import wiki.entities.Rol;
 import wiki.entities.Rol.Tipo;
 import wiki.entities.User;
 import wiki.entities.Wiki;
+import wiki.services.HTMLBlockOperationData;
+import wiki.services.HTMLComparatorService;
 
 public class Tools {
 
@@ -194,6 +200,88 @@ public class Tools {
 	    return "edited.html";
 	}
 	
-	
+	public static ArrayList<SupervisionVO> populateSupervisionVO(User currentUser, ArrayList<Wiki> wikis, ArrayList<Revision> revisiones, ArrayList<User> users, ArrayList<Articulo> articulos){
+		
+		ArrayList<SupervisionVO> supervisiones = new ArrayList<SupervisionVO>();
+		
+		ArrayList<Integer> articulosSupervisados = new ArrayList<Integer>();
+		
+		System.out.println("TAMAÑO roles: " + currentUser.getRoles().size() + " username " + currentUser.getUsername());
+		//recorremos los roles para sacar los ids de articulos y si son wikis, los de todos los articulos de esa wiki.
+		currentUser.getRoles().forEach( rol -> {
+			//solo supervisores aprobados
+			if (rol.getTipo().equals(Tipo.SUPERVISOR)) {
+				
+				if (rol.getArticulo_id() != 0) {
+					articulosSupervisados.add(rol.getArticulo_id());
+				}
+				if (rol.getWiki_id() != 0) {
+					wikis.forEach( wiki ->{
+						if (rol.getWiki_id() == wiki.getId()) {
+							wiki.getArticulos().forEach(articulo -> {
+								articulosSupervisados.add(articulo.getId());
+							});
+						}
+					});
+				}
+			}
+		});
+		
+		System.out.println("TAMAÑO articulos supervisados: " + articulosSupervisados.size());
+		
+		// recorremos las revisiones quedandonos solo con las que son para este usuario gracias 
+		// a que tenemos ya la lista de articulos supervisados.
+		revisiones.forEach( revision -> {
+			if (articulosSupervisados.contains(revision.getArticulo_id())){
+				SupervisionVO supervision = new SupervisionVO();
+				
+				supervision.setArticulo_id(revision.getArticulo_id());
+				supervision.setId(revision.getId());
+				//poblamos la info del usuario
+				users.forEach(user -> {
+					user.getRevisiones().forEach(userRev ->{
+						if (userRev.getId() == revision.getId()) {
+							supervision.setUsername(user.getUsername());
+							supervision.setUser_id(user.getId());
+						}
+					});
+				});
+				//poblamos la info del articulo
+				articulos.forEach(articulo ->{
+					if (revision.getArticulo_id() == articulo.getId()) {
+						   supervision.setTitulo_articulo(articulo.getTitulo());
+					}
+				});
+				
+				supervisiones.add(supervision);
+			}
+		});
+		
+		return supervisiones;
+	}
+
+
+	public static ConcreteSupervisionVO populateConcreteSupervisionVO(
+			User currentUser, 
+			Revision currentRevision, 
+			Articulo currentArticulo, 
+			HTMLComparatorService comparator			
+			) {
+		
+		ConcreteSupervisionVO concrete = new ConcreteSupervisionVO();
+		
+		concrete.setId(currentRevision.getId());
+		concrete.setUsername(currentUser.getUsername());
+		
+		concrete.setOperaciones(comparator.getListaOperaciones());
+		concrete.setOriginal(currentArticulo.getContenido());
+		concrete.setPropuesta(currentRevision.getPropuesta());		
+		
+		concrete.setArticulo_id(currentRevision.getId());
+		concrete.setTitulo_articulo(currentArticulo.getTitulo());
+		
+		
+		return concrete;
+	}
 
 }
