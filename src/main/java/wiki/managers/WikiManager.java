@@ -325,6 +325,36 @@ public class WikiManager {
 		
 	}
 
+	public void doSupervisionOperations(String[] indices, String supervision_id) {
+		
+		RevisionDAO revisionDAO = new RevisionDAO();
+		Revision currentRevision = revisionDAO.getRevisionByID(Integer.parseInt(supervision_id));
+				
+		ArticuloDAO articuloDAO = new ArticuloDAO();
+		Articulo currentArticulo = articuloDAO.getArticuloByID(currentRevision.getArticulo_id());
+		
+		System.out.println("Actual: " + currentArticulo.getContenido());
+		System.out.println("Propuesto: " + currentRevision.getPropuesta());
+		
+		HTMLComparatorService comparatorService = new HTMLComparatorService();
+		comparatorService.compare(currentArticulo.getContenido(), currentRevision.getPropuesta());	
+		
+		
+		Integer[] operaciones = Tools.convertStringArrayToIntArray(indices);
+		comparatorService.doOperations(operaciones);	
+		
+		//convertimos el array de strings de nuevo en un unico string para guardarlo
+		String finalString = Tools.concatenateStringsArrayToSTring(comparatorService.getFinalParts());
+		System.out.println("Final: " + finalString);
+		currentArticulo.setContenido(finalString);
+		//Guardamos el articulo modificado
+		articuloDAO.editarArticulo(currentArticulo);
+		
+		//Eliminamos la revision 
+		this.eliminarRevision(currentRevision.getId());
+		
+	}
+
 
 		
 }

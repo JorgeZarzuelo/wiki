@@ -1,6 +1,6 @@
 package wiki;
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
 
 import javax.servlet.ServletContextEvent;
@@ -10,7 +10,6 @@ import wiki.entities.Rol.Tipo;
 import wiki.entities.User;
 import wiki.entities.Wiki;
 import wiki.managers.WikiManager;
-import wiki.services.HTMLBlockOperationData;
 import wiki.services.HTMLComparatorService;
 
 public class Test implements ServletContextListener {
@@ -46,7 +45,7 @@ public class Test implements ServletContextListener {
 	    
 	    HTMLComparatorService htmlComparator = new HTMLComparatorService();
 	    htmlComparator.compare("<p>este es el primero </p><p>este es el segundo</p>", "<p>este es el prime</p><p>este es el segundo</p><p>este es el tercero</p><p>este es el cuarto</p>");
-	    int lista[] = {3};
+	    Integer lista[] = {3};
 	    htmlComparator.doOperations(lista);
 	    
 	    Arrays.asList(htmlComparator.getFinalParts()).forEach(part ->{

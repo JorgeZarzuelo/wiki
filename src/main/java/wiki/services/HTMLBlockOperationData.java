@@ -1,6 +1,5 @@
 package wiki.services;
 
-import wiki.services.HTMLBlockOperationData.Operacion;
 
 public class HTMLBlockOperationData {
 	private int initialPosition;
@@ -12,7 +11,7 @@ public class HTMLBlockOperationData {
 		
 	
 	public enum Operacion{
-		AÑADIR, MODIFICAR, ELIMINAR, MANTENER
+		ADD, MODIFICAR, ELIMINAR, MANTENER
 	}
 
 

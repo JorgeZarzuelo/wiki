@@ -88,6 +88,23 @@ public class RevisionDAO {
 		}
 	}
 	
+	public Revision getRevisionByID(Integer id) {
+		Revision currentRevision = null;
+		EntityManager em = WikiEntityManager.getEntityManager();
+		try {
+			Revision revision = em.find(Revision.class, id);
+			if(revision != null) {				
+				currentRevision = revision;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();			
+		} finally {
+			em.close();
+		}
+		
+		return currentRevision;
+	}
+	
 
 	
 }

@@ -28,19 +28,26 @@
 	              
 		              <h2> Cambios propuestos </h2>
 		              <form action="${pageContext.request.contextPath}/revision" method="post">
-		              <c:forEach var="operacion" items="${requestScope.supervision.operaciones}" >
+		              <c:forEach var="operacion" items="${requestScope.supervision.operaciones}" varStatus="loop">
+		                 <c:if test="${operacion.operacion != 'MANTENER'}">
 		              		<div class="htmlcomp">
 				               <div class="antes"><span class="${operacion.operacion}">${operacion.htmlOriginal}</span></div>
 				               <div class="despues"><span class="${operacion.operacion}">${operacion.htmlPropuesto}</span></div>
 				               <div class="operacion">Marque la casilla para aceptar el cambio, si la deja desmarcada se considera no aceptado:
-				               CAMBIO:${operacion.operacion} - INDEX:${operacion.initialPosition}
-				               
-				               
+				               <p><c:if test="${operacion.operacion == 'ADD'}"><input type="checkbox" name="add_operation_index" value="${loop.index}"> </c:if>
+				               CAMBIO:${operacion.operacion} - INDEX:${operacion.initialPosition} </p>
+				               <c:if test="${operacion.operacion == 'ELIMINAR'}"> <p>La eliminación se procesa automáticamente</p> </c:if>				               
 				               </div>
-				             </div>
-		              
-		              
+				             </div>		                     
+		                 </c:if>
+		                 <c:if test="${operacion.operacion == 'ELIMINAR'}">
+		                	 <input type="hidden" name="add_operation_index" value="${loop.index}" />
+		                 </c:if>
+		                 <c:if test="${operacion.operacion == 'MANTENER'}">
+		                	 <input type="hidden" name="add_operation_index" value="${loop.index}" />
+		                 </c:if>
 		              </c:forEach>
+		              <input type="hidden" name="revision_id" value="${requestScope.supervision.id}" />
 		              <button type="submit">ACEPTAR CAMBIOS MARCADOS</button>
 	                </form>
 	            </div>    

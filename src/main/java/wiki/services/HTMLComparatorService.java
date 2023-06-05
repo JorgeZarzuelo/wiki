@@ -2,6 +2,7 @@ package wiki.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import wiki.services.HTMLBlockOperationData.Operacion;
@@ -66,7 +67,7 @@ public class HTMLComparatorService {
 								   
 				   //es nuevo
 				   else {
-					   operationData.setOperacion(Operacion.AÑADIR);
+					   operationData.setOperacion(Operacion.ADD);
 					   operationData.setHtmlPropuesto(propuestoParts[x]);					   
 					   operationData.setInitialPosition(x);
 					   operationData.setFinalPosition(x);  					   
@@ -118,7 +119,7 @@ public class HTMLComparatorService {
 				case ELIMINAR:
 					//this.finalParts[index] = null;
 					break;				
-				case AÑADIR:					
+				case ADD:					
 					this.finalParts[index] = operacion.getHtmlPropuesto();
 					break;
 				case MANTENER:
@@ -134,6 +135,8 @@ public class HTMLComparatorService {
 			
 		});
 		
+		
+		
 	}
 	
 	/**
@@ -141,7 +144,7 @@ public class HTMLComparatorService {
 	 * Tiene sentido pensar que siempre tendra menos partes que las originales + las propuestas
 	 * @param operaciones
 	 */
-	public void doOperations (int[] operaciones) {
+	public void doOperations (Integer[] operaciones) {
 		
 		this.finalParts = new String[this.propuestoParts.length + this.originalParts.length];	
 		
@@ -149,7 +152,8 @@ public class HTMLComparatorService {
 			this.doOperation(operaciones[i]);
 		}
 	
-	
+		// limpiamos el array de objetos nulos
+		this.finalParts = Arrays.stream(this.finalParts).filter(Objects::nonNull).toArray(String[]::new);
 		
 	}
 

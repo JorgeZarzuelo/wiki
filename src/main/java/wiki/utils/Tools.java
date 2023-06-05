@@ -284,4 +284,28 @@ public class Tools {
 		return concrete;
 	}
 
+
+	public static Integer[] convertStringArrayToIntArray(String[] indices) {
+		Integer[] numeros = new Integer[indices.length];
+		
+		for (int i = 0; i < indices.length ; i++) {
+			numeros[i] = Integer.parseInt(indices[i]);
+		}
+		
+		return numeros;
+	}
+
+
+	public static String concatenateStringsArrayToSTring(String[] finalParts) {
+		String finalString = "";
+		
+		for (int i= 0; i< finalParts.length ; i ++) {
+			
+			finalString = finalString + finalParts[i];
+		}
+		
+		
+		return finalString;
+	}
+
 }
