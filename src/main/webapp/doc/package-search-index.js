@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"wiki"},{"l":"wiki.controllers"},{"l":"wiki.controllers.admin"},{"l":"wiki.controllers.usuarios"},{"l":"wiki.DAO"},{"l":"wiki.entities"},{"l":"wiki.filters"},{"l":"wiki.managers"},{"l":"wiki.services"},{"l":"wiki.utils"},{"l":"wiki.VO"}]
