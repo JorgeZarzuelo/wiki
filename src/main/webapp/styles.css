@@ -216,7 +216,15 @@ tr.border {
 	float:right;
 }
 
-
+.portada{
+	border: 2px dashed #323369;
+	padding: 15px;
+	margin-bottom: 20px;
+	
+}
+.portada li{
+	margin-left: 20px;
+}
 
 
 

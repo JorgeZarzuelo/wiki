@@ -6,6 +6,15 @@
         <c:if test="${requestScope.mensaje != null}">
                  <div class="mensaje">${ requestScope.mensaje != null ? mensaje : '' }</div>
          </c:if>
+         <div class="portada">
+         	<p>Para el testeo de la aplicación se cargan durante el arranque algunas wikis y artículos y tambien algunos usuarios:</p>
+         	<ul>
+         		<li>GESTOR: admin/admin</li>
+         		<li>COORDINADOR: coordinador/1234</li>
+         		<li>SUPERVISOR: supervisor/1234</li>
+         		<li>Usuario normal registrado: user1/1234</li>
+         	</ul>
+         </div>
         <c:if test="${requestScope.wikis != null}">
         	<c:forEach var="wiki" items="${requestScope.wikis}">
         	   <div class="wiki">
